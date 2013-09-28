@@ -1,5 +1,5 @@
 #ifndef _AAUTOMATA_HH_
-# define _AATOMATA_HH_
+# define _AAUTOMATA_HH_
 
 typedef struct 		s_state
 {
