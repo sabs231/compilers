@@ -4,15 +4,18 @@
 #include 	"NumberAutomata.hh"
 #include 	"IdAutomata.hh"
 #include 	"StringAutomata.hh"
+#include	"ArithmeticAutomata.hh"
 
 Analex::Analex()
 {
 	AAutomata *numbers 	= new NumberAutomata();
 	AAutomata *ids 		= new IdAutomata();
 	AAutomata *strings	= new StringAutomata();
-	this->_automata.push_back(numbers);
-	this->_automata.push_back(ids);
-	this->_automata.push_back(strings);
+	AAutomata *arithmetic	= new ArithmeticAutomata();
+	_automata.push_back(numbers);
+	_automata.push_back(ids);
+	_automata.push_back(strings);
+	_automata.push_back(arithmetic);
 }
 
 Analex::Analex(Analex const &other)
