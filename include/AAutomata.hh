@@ -10,7 +10,7 @@ typedef struct 		s_state
 class 						AAutomata
 {
 	protected:
-		t_state 			**_trasitionTable;
+		t_state 			**_transitionTable;
 		unsigned int 	_stateNum;
 		unsigned int 	_symbolNum;
 
