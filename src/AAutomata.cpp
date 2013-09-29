@@ -13,6 +13,8 @@ AAutomata::AAutomata(AAutomata const & other)
 	this->_transitionTable = other._transitionTable;
 	this->_stateNum = other._stateNum;
 	this->_symbolNum = other._symbolNum;
+	this->_stateIndex = other._stateIndex;
+	this->_symbolIndex = other._symbolIndex;
 }
 
 AAutomata::AAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum)
@@ -29,12 +31,44 @@ AAutomata & AAutomata::operator=(AAutomata const & other)
 		this->_transitionTable = other._transitionTable;
 		this->_stateNum = other._stateNum;
 		this->_symbolNum = other._symbolNum;
+		this->_stateIndex = other._stateIndex;
+		this->_symbolIndex = other._symbolIndex;
 	}
 	return (*this);
 }
 
-char 	AAutomata::getInitialState() const
+unsigned int AAutomata::getStateNum() const
 {
-	// Implement this
-	return ('\0');
+	return (this->_stateNum);
+}
+
+unsigned int AAutomata::getSymbolNum() const
+{
+	return (this->_symbolNum);
+}
+
+int AAutomata::getStateIndex(char currentState) const
+{
+	std::map<char, int>::const_iterator 	it;
+
+	it = this->_stateIndex.find(currentState);
+	if (it == this->_stateIndex.end())
+		return (-1);
+	return (it->second);
+}
+
+int AAutomata::getSymbolIndex(char currentSymbol) const
+{
+	std::map<char, int>::const_iterator 	it;
+
+	it = this->_symbolIndex.find(currentSymbol);
+	if (it == this->_symbolIndex.end())
+		return (-1);
+	return (it->second);
+}
+
+t_state 	*AAutomata::getInitialState() const
+{
+	if (this->_transitionTable)
+		return (&this->_transitionTable[0][0]);
 }

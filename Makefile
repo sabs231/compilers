@@ -1,5 +1,7 @@
 SRC			=		src/AAutomata.cpp			\
-					src/NumberAutomata.cpp
+					src/NumberAutomata.cpp		\
+					src/Analex.cpp				\
+					src/main.cpp
 
 OBJS		=		$(SRC:.cpp=.o)
 
