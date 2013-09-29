@@ -2,11 +2,17 @@
 #include 	<iostream>
 #include 	"Analex.hh"
 #include 	"NumberAutomata.hh"
+#include 	"IdAutomata.hh"
+#include 	"StringAutomata.hh"
 
 Analex::Analex()
 {
-	AAutomata *numbers = new NumberAutomata();
+	AAutomata *numbers 	= new NumberAutomata();
+	AAutomata *ids 		= new IdAutomata();
+	AAutomata *strings	= new StringAutomata();
 	this->_automata.push_back(numbers);
+	this->_automata.push_back(ids);
+	this->_automata.push_back(strings);
 }
 
 Analex::Analex(Analex const &other)

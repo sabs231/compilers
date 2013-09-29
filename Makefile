@@ -1,6 +1,7 @@
 SRC			=		src/AAutomata.cpp			\
 					src/NumberAutomata.cpp		\
 					src/IdAutomata.cpp			\
+					src/StringAutomata.cpp		\
 					src/Analex.cpp				\
 					src/main.cpp
 
