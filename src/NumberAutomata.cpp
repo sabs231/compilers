@@ -4,15 +4,17 @@
 NumberAutomata::NumberAutomata()
 	: AAutomata()
 {
-	this->_transitionTable = new t_state*[2];
-	for (int i = 0; i < 2; i++)
-		this->_transitionTable[i] = new t_state[10]; // Numbers 0 - 9
-	for (int i = 0; i < 2; i++)
+	this->_stateNum = 2;
+	this->_symbolNum = 10;
+	this->_transitionTable = new t_state*[this->_stateNum];
+	for (int i = 0; i < this->_stateNum; i++)
+		this->_transitionTable[i] = new t_state[this->_symbolNum]; // Numbers 0 - 9
+	for (int i = 0; i < this->_stateNum; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < this->_symbolNum; j++)
 		{
 			this->_transitionTable[i][j].name = 'B';
-			if (i == 1)
+			if (i == this->_stateNum - 1)
 				this->_transitionTable[i][j].isFinal = true;
 			this->_transitionTable[i][j].isFinal = false;
 		}
