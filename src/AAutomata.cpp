@@ -71,4 +71,17 @@ t_state 	*AAutomata::getInitialState() const
 {
 	if (this->_transitionTable)
 		return (&this->_transitionTable[0][0]);
+	return (NULL);
+}
+
+t_state *AAutomata::transition(t_state *currentState, char nextChar)
+{
+	int 	stateIndex;
+	int 	symbolIndex;
+
+	if ((stateIndex = this->getStateIndex(currentState->name)) == -1)
+		return (NULL);
+	if ((symbolIndex = this->getSymbolIndex(nextChar)) == -1)
+		return (NULL);
+	return (&this->_transitionTable[stateIndex][symbolIndex]);
 }

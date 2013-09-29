@@ -24,3 +24,8 @@ Analex & Analex::operator=(Analex const &other)
 Analex::~Analex()
 {
 }
+
+std::vector<AAutomata *> & Analex::getAutomata()
+{
+	return (this->_automata);
+}

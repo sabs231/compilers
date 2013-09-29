@@ -29,7 +29,7 @@ class 										AAutomata
 		unsigned int getSymbolNum() const;
 		int getStateIndex(char currentState) const;
 		int getSymbolIndex(char currentSymbol) const;
-		virtual t_state *transition(t_state *currentState, char nextChar) = 0;
+		t_state *transition(t_state *currentState, char nextChar);
 };
 
 #endif

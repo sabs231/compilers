@@ -28,7 +28,8 @@ NumberAutomata::NumberAutomata()
 			this->_transitionTable[i][j].name = 'B';
 			if (i == this->_stateNum - 1)
 				this->_transitionTable[i][j].isFinal = true;
-			this->_transitionTable[i][j].isFinal = false;
+			else
+				this->_transitionTable[i][j].isFinal = false;
 		}
 	}
 }
@@ -43,16 +44,3 @@ NumberAutomata::~NumberAutomata()
 	if (this->_transitionTable)
 		delete [] this->_transitionTable;
 }
-
-t_state *NumberAutomata::transition(t_state *currentState, char nextChar)
-{
-	int 	stateIndex;
-	int 	symbolIndex;
-
-	if ((stateIndex = this->getStateIndex(currentState->name)) == -1)
-		return (NULL);
-	if ((symbolIndex = this->getSymbolIndex(nextChar)) == -1)
-		return (NULL);
-	return (&this->_transitionTable[stateIndex][symbolIndex]);
-}
-
