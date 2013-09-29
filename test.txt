@@ -1,1 +1,14 @@
-123123
+arr a = [1,2,"a",4,"lala",nil];
+count i = 0;
+while(contador < 5){
+	if(contador % 2 == 0){
+@"<h1>";
+		@a[contador];
+		@"</h1><br>"@;
+}else{
+@"<p>";
+		@a[contador];
+		@"</p><br>"@;
+}
+contador=contador+1;
+}

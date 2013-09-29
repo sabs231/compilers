@@ -2,6 +2,7 @@
 # define _ANALEX_HH_
 
 #include 																<vector>
+#include 																<string>
 #include 																"AAutomata.hh"
 
 class 																	Analex
@@ -14,6 +15,7 @@ class 																	Analex
 		Analex & operator=(Analex const &);
 		~Analex();
 		std::vector<AAutomata *> & getAutomata();
+		int run(char *fileName);
 
 };
 
