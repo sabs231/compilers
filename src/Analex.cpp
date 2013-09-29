@@ -5,17 +5,52 @@
 #include 	"IdAutomata.hh"
 #include 	"StringAutomata.hh"
 #include	"ArithmeticAutomata.hh"
+#include	"RelationalAutomata.hh"
+#include	"AsignmentAutomata.hh"
+#include	"PunctuationAutomata.hh"
+#include	"AgrupationAutomata.hh"
+#include	"OutputAutomata.hh"
 
 Analex::Analex()
 {
-	AAutomata *numbers 	= new NumberAutomata();
-	AAutomata *ids 		= new IdAutomata();
-	AAutomata *strings	= new StringAutomata();
+	AAutomata *numbers 		= new NumberAutomata();
+	AAutomata *ids 			= new IdAutomata();
+	AAutomata *strings		= new StringAutomata();
 	AAutomata *arithmetic	= new ArithmeticAutomata();
+	AAutomata *relational	= new RelationalAutomata();
+	AAutomata *asignment	= new AsignmentAutomata();
+	AAutomata *punctuation	= new PunctuationAutomata();
+	AAutomata *agrupation	= new AgrupationAutomata();
+	AAutomata *output		= new OutputAutomata();
 	_automata.push_back(numbers);
 	_automata.push_back(ids);
 	_automata.push_back(strings);
 	_automata.push_back(arithmetic);
+	_automata.push_back(relational);
+	_automata.push_back(asignment);
+	_automata.push_back(punctuation);
+	_automata.push_back(agrupation);
+	_automata.push_back(output);
+	
+	// Delete after finishing Automatas
+	std::cout << "Number Automata" << std::endl;
+	numbers->printTransitionTable();
+	std::cout << "Id Automata" << std::endl;
+	ids->printTransitionTable();
+	std::cout << "String Automata" << std::endl;
+	strings->printTransitionTable();
+	std::cout << "Arithmetic Automata" << std::endl;
+	arithmetic->printTransitionTable();
+	std::cout << "Relational Automata" << std::endl;
+	relational->printTransitionTable();
+	std::cout << "Asignment Automata" << std::endl;
+	asignment->printTransitionTable();
+	std::cout << "Punctuation Automata" << std::endl;
+	punctuation->printTransitionTable();
+	std::cout << "Agrupation Automata" << std::endl;
+	agrupation->printTransitionTable();
+	std::cout << "Output Automata" << std::endl;
+	output->printTransitionTable();
 }
 
 Analex::Analex(Analex const &other)

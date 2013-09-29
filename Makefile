@@ -2,7 +2,12 @@ SRC			=		src/AAutomata.cpp			\
 					src/NumberAutomata.cpp		\
 					src/IdAutomata.cpp			\
 					src/StringAutomata.cpp		\
-					src/ArithmeticAutomata.cpp		\
+					src/ArithmeticAutomata.cpp	\
+					src/RelationalAutomata.cpp	\
+					src/AsignmentAutomata.cpp	\
+					src/PunctuationAutomata.cpp	\
+					src/AgrupationAutomata.cpp	\
+					src/OutputAutomata.cpp	\
 					src/Analex.cpp				\
 					src/main.cpp
 
