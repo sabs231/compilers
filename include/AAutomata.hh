@@ -30,6 +30,8 @@ class 										AAutomata
 		int getStateIndex(char currentState) const;
 		int getSymbolIndex(char currentSymbol) const;
 		t_state *transition(t_state *currentState, char nextChar);
+		virtual char simplifySymbol(char currentSymbol) const;
+		void printTransitionTable();
 };
 
 #endif

@@ -1,4 +1,5 @@
 #include 	<cstdlib>
+#include 	<iostream>
 #include 	"AAutomata.hh"
 
 AAutomata::AAutomata()
@@ -61,7 +62,7 @@ int AAutomata::getSymbolIndex(char currentSymbol) const
 {
 	std::map<char, int>::const_iterator 	it;
 
-	it = this->_symbolIndex.find(currentSymbol);
+	it = this->_symbolIndex.find(this->simplifySymbol(currentSymbol));
 	if (it == this->_symbolIndex.end())
 		return (-1);
 	return (it->second);
@@ -74,6 +75,11 @@ t_state 	*AAutomata::getInitialState() const
 	return (NULL);
 }
 
+char AAutomata::simplifySymbol(char currentSymbol) const
+{
+	return currentSymbol;
+}
+
 t_state *AAutomata::transition(t_state *currentState, char nextChar)
 {
 	int 	stateIndex;
@@ -84,4 +90,16 @@ t_state *AAutomata::transition(t_state *currentState, char nextChar)
 	if ((symbolIndex = this->getSymbolIndex(nextChar)) == -1)
 		return (NULL);
 	return (&this->_transitionTable[stateIndex][symbolIndex]);
+}
+
+void AAutomata::printTransitionTable()
+{
+	for (unsigned int i = 0; i < this->_stateNum; i++)
+	{
+		for (unsigned int j = 0; j < this->_symbolNum; j++)
+		{
+			std::cout << this->_transitionTable[i][j].name << "," << this->_transitionTable[i][j].isFinal << " ";
+		}
+		std::cout << std::endl;
+	}
 }

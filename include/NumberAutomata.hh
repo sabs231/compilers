@@ -9,6 +9,7 @@ class 	NumberAutomata : public AAutomata
 		NumberAutomata();
 		NumberAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum);
 		~NumberAutomata();
+		virtual char simplifySymbol(char currentSymbol) const;
 };
 
 #endif
