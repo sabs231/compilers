@@ -17,10 +17,7 @@ NumberAutomata::NumberAutomata()
 		for (unsigned int j = 0; j < this->_symbolNum; j++)
 		{
 			this->_transitionTable[i][j].name = 'B';
-			if (i == this->_stateNum - 1)
-				this->_transitionTable[i][j].isFinal = true;
-			else
-				this->_transitionTable[i][j].isFinal = false;
+			this->_transitionTable[i][j].isFinal = true;
 		}
 	}
 }
