@@ -10,6 +10,7 @@
 #include	"PunctuationAutomata.hh"
 #include	"AgrupationAutomata.hh"
 #include	"OutputAutomata.hh"
+#include	"ReservedAutomata.hh"
 
 Analex::Analex()
 {
@@ -22,6 +23,7 @@ Analex::Analex()
 	AAutomata *punctuation	= new PunctuationAutomata();
 	AAutomata *agrupation	= new AgrupationAutomata();
 	AAutomata *output		= new OutputAutomata();
+	AAutomata *reserved		= new ReservedAutomata();
 	_automata.push_back(numbers);
 	_automata.push_back(ids);
 	_automata.push_back(strings);
@@ -31,8 +33,9 @@ Analex::Analex()
 	_automata.push_back(punctuation);
 	_automata.push_back(agrupation);
 	_automata.push_back(output);
+	_automata.push_back(reserved);
 	
-	// Delete after finishing Automatas
+	/* XXX Testing Transition Tables, dont delete
 	std::cout << "Number Automata" << std::endl;
 	numbers->printTransitionTable();
 	std::cout << "Id Automata" << std::endl;
@@ -51,6 +54,9 @@ Analex::Analex()
 	agrupation->printTransitionTable();
 	std::cout << "Output Automata" << std::endl;
 	output->printTransitionTable();
+	std::cout << "Reserved Automata" << std::endl;
+	reserved->printTransitionTable();
+	*/
 }
 
 Analex::Analex(Analex const &other)

@@ -8,6 +8,7 @@ SRC			=		src/AAutomata.cpp			\
 					src/PunctuationAutomata.cpp	\
 					src/AgrupationAutomata.cpp	\
 					src/OutputAutomata.cpp	\
+					src/ReservedAutomata.cpp	\
 					src/Analex.cpp				\
 					src/main.cpp
 
