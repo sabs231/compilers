@@ -14,17 +14,19 @@
 
 Analex::Analex()
 {
-	AAutomata *numbers 		= new NumberAutomata();
-	AAutomata *ids 			= new IdAutomata();
-	AAutomata *strings		= new StringAutomata();
-	AAutomata *arithmetic	= new ArithmeticAutomata();
-	AAutomata *relational	= new RelationalAutomata();
-	AAutomata *asignment	= new AsignmentAutomata();
-	AAutomata *punctuation	= new PunctuationAutomata();
-	AAutomata *agrupation	= new AgrupationAutomata();
-	AAutomata *output		= new OutputAutomata();
-	AAutomata *reserved		= new ReservedAutomata();
+	AAutomata *numbers 		= new NumberAutomata(std::string("Number"));
+	AAutomata *reserved		= new ReservedAutomata(std::string("Reserved"));
+	AAutomata *ids 			= new IdAutomata(std::string("Id"));
+	AAutomata *strings		= new StringAutomata(std::string("String"));
+	AAutomata *arithmetic	= new ArithmeticAutomata(std::string("Arithmetic"));
+	AAutomata *relational	= new RelationalAutomata(std::string("Relational"));
+	AAutomata *asignment	= new AsignmentAutomata(std::string("Asignment"));
+	AAutomata *punctuation	= new PunctuationAutomata(std::string("Punctuation"));
+	AAutomata *agrupation	= new AgrupationAutomata(std::string("Agrupation"));
+	AAutomata *output		= new OutputAutomata(std::string("Output"));
+
 	this->_automata.push_back(numbers);
+	this->_automata.push_back(reserved);
 	this->_automata.push_back(ids);
 	this->_automata.push_back(strings);
 	this->_automata.push_back(arithmetic);
@@ -33,7 +35,7 @@ Analex::Analex()
 	this->_automata.push_back(punctuation);
 	this->_automata.push_back(agrupation);
 	this->_automata.push_back(output);
-	this->_automata.push_back(reserved);
+
 	
 	/* XXX Testing Transition Tables, dont delete
 	std::cout << "Number Automata" << std::endl;
