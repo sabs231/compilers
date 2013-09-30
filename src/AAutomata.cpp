@@ -92,6 +92,8 @@ t_state *AAutomata::transition(t_state *currentState, char nextChar)
 		return (NULL);
 	if ((symbolIndex = this->getSymbolIndex(nextChar)) == -1)
 		return (NULL);
+	if (this->_transitionTable[stateIndex][symbolIndex].name=='#')
+		return (NULL);
 	return (&this->_transitionTable[stateIndex][symbolIndex]);
 }
 

@@ -63,6 +63,7 @@ int Analex::run(char *fileName)
 {
 	std::ifstream 		inputRead(fileName);
 	char 				currentChar, nextChar;
+	bool				accepted = false;
 	t_state*			currentState;
 	t_state*			nextState;
 	std::streampos		lastPosition, LAPosition;
@@ -95,6 +96,7 @@ int Analex::run(char *fileName)
 						std::cout << currentChar << " LEXEMA ACEPTADO - Automata: " << (*it)->getName() << std::endl;
 						lastPosition	= inputRead.tellg();
 						it = this->_automata.begin();
+						accepted = true;
 						break;
 					}
 				}else if(currentState!=NULL && !currentState->isFinal){
@@ -105,7 +107,11 @@ int Analex::run(char *fileName)
 					break;
 				}
 			}
-			it++;
+			if(!accepted){
+				++it;
+			}else{
+				accepted = false;
+			}
 		}
 		if(inputRead.good()){
 			inputRead.get(currentChar);
