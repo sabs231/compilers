@@ -109,6 +109,7 @@ void AAutomata::printTransitionTable()
 	}
 }
 
-std::string AAutomata::getName() const{
-	return this->_automataName;
+std::string AAutomata::getName()
+{
+	return (this->_automataName);
 }

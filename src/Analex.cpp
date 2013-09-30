@@ -12,7 +12,8 @@
 #include	"OutputAutomata.hh"
 #include	"ReservedAutomata.hh"
 
-Analex::Analex()
+Analex::Analex(SymbolTable *symTab)
+	: _symTab(symTab)
 {
 	AAutomata *numbers 		= new NumberAutomata(std::string("Number"));
 	AAutomata *reserved		= new ReservedAutomata(std::string("Reserved"));
@@ -98,7 +99,7 @@ int Analex::run(char *fileName)
 					if (nextState == NULL)
 					{
 						// Finish
-						std::cout << " LEXEMA " << lexeme << " ACEPTADO - Automata: " << (*it)->getName() << std::endl;
+						this->_symTab->insert((*it)->getName(), lexeme);
 						lastPosition = inputRead.tellg();
 						it = this->_automata.begin();
 						lexeme.erase();
@@ -106,10 +107,6 @@ int Analex::run(char *fileName)
 						break;
 					}
 				}
-				/*else if (currentState != NULL && !currentState->isFinal)
-				{
-					// Not Final, just keep reading
-				}*/
 				else if (currentState == NULL)
 				{
 					// NULL, Check with next Automata

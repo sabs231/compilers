@@ -13,12 +13,12 @@ typedef struct 						s_state
 class 										AAutomata
 {
 	protected:
-		t_state 				**_transitionTable;
-		unsigned int 			_stateNum;
-		unsigned int 			_symbolNum;
+		t_state 							**_transitionTable;
+		unsigned int 					_stateNum;
+		unsigned int 					_symbolNum;
 		std::map<char, int> 	_stateIndex;
 		std::map<char, int> 	_symbolIndex;
-		std::string				_automataName;
+		std::string						_automataName;
 
 	public:
 		AAutomata(std::string name);
@@ -34,7 +34,7 @@ class 										AAutomata
 		t_state *transition(t_state *currentState, char nextChar);
 		virtual char simplifySymbol(char currentSymbol) const;
 		void printTransitionTable();
-		std::string getName() const;
+		std::string getName();
 };
 
 #endif

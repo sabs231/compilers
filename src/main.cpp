@@ -3,7 +3,9 @@
 
 int 							main(int argc, char **argv)
 {
-	Analex 					a;
+	SymbolTable 		*tab = new SymbolTable();
+	Analex 					a(tab);
+	std::multimap<std::string, std::string>::iterator 	it;
 
 	if (argc != 2)
 	{
@@ -11,5 +13,8 @@ int 							main(int argc, char **argv)
 		return (-1);
 	}
 	a.run(argv[1]);
+	std::cout << "printing symTable" << std::endl;
+	for (it = tab->getSymTable().begin(); it != tab->getSymTable().end(); ++it)
+		std::cout << it->first << " ==> " << it->second << std::endl;
 	return (0);
 }

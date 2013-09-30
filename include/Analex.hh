@@ -4,13 +4,15 @@
 #include 																<vector>
 #include 																<string>
 #include 																"AAutomata.hh"
+#include 																"SymbolTable.hh"
 
 class 																	Analex
 {
 	protected:
+		SymbolTable 												*_symTab;
 		std::vector<AAutomata *> 						_automata;
 	public:
-		Analex();
+		Analex(SymbolTable *);
 		Analex(Analex const &);
 		Analex & operator=(Analex const &);
 		~Analex();
