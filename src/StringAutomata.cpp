@@ -1,8 +1,8 @@
 #include 	"StringAutomata.hh"
 
 
-StringAutomata::StringAutomata()
-	: AAutomata()
+StringAutomata::StringAutomata(std::string name)
+	: AAutomata(name)
 {
 	this->_stateNum = 3;
 	this->_symbolNum = 4;
@@ -33,8 +33,8 @@ StringAutomata::StringAutomata()
 	this->_transitionTable[1][3].isFinal = true;
 }
 
-StringAutomata::StringAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum)
-	: AAutomata(transitionTable, stateNum, symbolNum)
+StringAutomata::StringAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name)
+	: AAutomata(transitionTable, stateNum, symbolNum, name)
 {
 }
 

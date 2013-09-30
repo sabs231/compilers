@@ -1,8 +1,8 @@
 #include 	"IdAutomata.hh"
 
 
-IdAutomata::IdAutomata()
-	: AAutomata()
+IdAutomata::IdAutomata(std::string name)
+	: AAutomata(name)
 {
 	this->_stateNum = 2;
 	this->_symbolNum = 2;
@@ -26,8 +26,8 @@ IdAutomata::IdAutomata()
 	this->_transitionTable[0][0].isFinal = false;
 }
 
-IdAutomata::IdAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum)
-	: AAutomata(transitionTable, stateNum, symbolNum)
+IdAutomata::IdAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name)
+	: AAutomata(transitionTable, stateNum, symbolNum, name)
 {
 }
 

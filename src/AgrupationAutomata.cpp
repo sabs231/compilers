@@ -1,8 +1,8 @@
 #include 	"AgrupationAutomata.hh"
 
 
-AgrupationAutomata::AgrupationAutomata()
-	: AAutomata()
+AgrupationAutomata::AgrupationAutomata(std::string name)
+	: AAutomata(name)
 {
 	this->_stateNum = 2;
 	this->_symbolNum = 1;
@@ -25,8 +25,8 @@ AgrupationAutomata::AgrupationAutomata()
 	this->_transitionTable[0][0].isFinal = true;
 }
 
-AgrupationAutomata::AgrupationAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum)
-	: AAutomata(transitionTable, stateNum, symbolNum)
+AgrupationAutomata::AgrupationAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name)
+	: AAutomata(transitionTable, stateNum, symbolNum, name)
 {
 }
 
