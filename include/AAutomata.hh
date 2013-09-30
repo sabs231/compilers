@@ -34,7 +34,7 @@ class 										AAutomata
 		t_state *transition(t_state *currentState, char nextChar);
 		virtual char simplifySymbol(char currentSymbol) const;
 		void printTransitionTable();
-		std::string getName();
+		std::string getName() const;
 };
 
 #endif
