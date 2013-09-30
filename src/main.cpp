@@ -5,6 +5,7 @@ int 							main(int argc, char **argv)
 {
 	SymbolTable 		*tab = new SymbolTable();
 	Analex 					a(tab);
+	std::string 		automata("Number");
 	std::multimap<std::string, std::string>::iterator 	it;
 
 	if (argc != 2)
@@ -13,9 +14,7 @@ int 							main(int argc, char **argv)
 		return (-1);
 	}
 	a.run(argv[1]);
-	std::cout << "Printing Symbol Table" << std::endl;
-	for (it = tab->getSymTable().begin(); it != tab->getSymTable().end(); ++it)
-		std::cout << it->first << " ==> " << it->second << std::endl;
+	std::cout << "Symbol Table written to symbolTable.txt" << std::endl;
 	tab->writeToFile();
 	return (0);
 }
