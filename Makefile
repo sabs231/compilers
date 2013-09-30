@@ -20,7 +20,7 @@ NAME		=		analex
 
 CXXFLAGS	+=		-I./include
 
-CXXFLAGS	+=		-W -Wall -g3
+CXXFLAGS	+=		-W -Wall -Wextra -Werror -g3
 
 all:				$(NAME)
 

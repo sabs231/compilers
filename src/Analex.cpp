@@ -35,7 +35,6 @@ Analex::Analex()
 	this->_automata.push_back(punctuation);
 	this->_automata.push_back(agrupation);
 	this->_automata.push_back(output);
-
 }
 
 Analex::Analex(Analex const &other)
@@ -61,61 +60,71 @@ std::vector<AAutomata *> & Analex::getAutomata()
 
 int Analex::run(char *fileName)
 {
-	std::ifstream 		inputRead(fileName);
-	char 				currentChar, nextChar;
-	bool				accepted = false;
-	t_state*			currentState;
-	t_state*			nextState;
-	std::streampos		lastPosition, LAPosition;
-	std::vector<AAutomata *>::iterator it;
-
+	std::ifstream 											inputRead(fileName);
+	char 																currentChar;
+	char 																nextChar;
+	bool																accepted = false;
+	t_state*														currentState;
+	t_state*														nextState;
+	std::streampos											lastPosition;
+	std::streampos											LAPosition;
+	std::string 												lexeme;
+	std::vector<AAutomata *>::iterator 	it;
 
 	if (!inputRead.is_open())
 	{
 		std::cerr << "Unable to open file: " << fileName << std::endl;
 		return (-1);
 	}
-	while(inputRead.good()){
-		lastPosition	= inputRead.tellg();
+	while (inputRead.good())
+	{
+		lastPosition = inputRead.tellg();
 		it = this->_automata.begin();
-		while(it != this->_automata.end() && inputRead.good())
+		while (it != this->_automata.end() && inputRead.good())
 		{
 			currentState = (*it)->getInitialState();
 			while (inputRead.good())
 			{
 				inputRead.get(currentChar);
+				lexeme += currentChar;
 				currentState = (*it)->transition(currentState, currentChar);
-				if(currentState!=NULL && currentState->isFinal){
+				if (currentState != NULL && currentState->isFinal)
+				{
 					// Lookahead
-					LAPosition	= inputRead.tellg();
+					LAPosition = inputRead.tellg();
 					inputRead.get(nextChar);
 					nextState = (*it)->transition(currentState, nextChar);
 					inputRead.seekg (LAPosition);
-					if(nextState==NULL){
+					if (nextState == NULL)
+					{
 						// Finish
-						std::cout << currentChar << " LEXEMA ACEPTADO - Automata: " << (*it)->getName() << std::endl;
-						lastPosition	= inputRead.tellg();
+						std::cout << " LEXEMA " << lexeme << " ACEPTADO - Automata: " << (*it)->getName() << std::endl;
+						lastPosition = inputRead.tellg();
 						it = this->_automata.begin();
+						lexeme.erase();
 						accepted = true;
 						break;
 					}
-				}else if(currentState!=NULL && !currentState->isFinal){
+				}
+				/*else if (currentState != NULL && !currentState->isFinal)
+				{
 					// Not Final, just keep reading
-				}else{
+				}*/
+				else if (currentState == NULL)
+				{
 					// NULL, Check with next Automata
-					inputRead.seekg (lastPosition);
+					inputRead.seekg(lastPosition);
+					lexeme.erase();
 					break;
 				}
 			}
-			if(!accepted){
+			if (!accepted)
 				++it;
-			}else{
+			else
 				accepted = false;
-			}
 		}
-		if(inputRead.good()){
+		if (inputRead.good())
 			inputRead.get(currentChar);
-		}
 	}
 	return (0);
 }
