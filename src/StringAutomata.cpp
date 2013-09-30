@@ -49,6 +49,8 @@ char StringAutomata::simplifySymbol(char currentSymbol) const{
 		return 'L';
 	}else if((currentSymbol >= '0' && currentSymbol <= '9') ){
 		return 'N';
+	}else if(currentSymbol == '<' || currentSymbol == '>' || currentSymbol == '/' || currentSymbol == '&'){
+		return 'N';
 	}else{
 		return currentSymbol;
 	}

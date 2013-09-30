@@ -36,29 +36,6 @@ Analex::Analex()
 	this->_automata.push_back(agrupation);
 	this->_automata.push_back(output);
 
-	
-	/* XXX Testing Transition Tables, dont delete
-	std::cout << "Number Automata" << std::endl;
-	numbers->printTransitionTable();
-	std::cout << "Id Automata" << std::endl;
-	ids->printTransitionTable();
-	std::cout << "String Automata" << std::endl;
-	strings->printTransitionTable();
-	std::cout << "Arithmetic Automata" << std::endl;
-	arithmetic->printTransitionTable();
-	std::cout << "Relational Automata" << std::endl;
-	relational->printTransitionTable();
-	std::cout << "Asignment Automata" << std::endl;
-	asignment->printTransitionTable();
-	std::cout << "Punctuation Automata" << std::endl;
-	punctuation->printTransitionTable();
-	std::cout << "Agrupation Automata" << std::endl;
-	agrupation->printTransitionTable();
-	std::cout << "Output Automata" << std::endl;
-	output->printTransitionTable();
-	std::cout << "Reserved Automata" << std::endl;
-	reserved->printTransitionTable();
-	*/
 }
 
 Analex::Analex(Analex const &other)
@@ -84,60 +61,54 @@ std::vector<AAutomata *> & Analex::getAutomata()
 
 int Analex::run(char *fileName)
 {
-	std::vector<AAutomata *>::iterator 	it;
-	std::ifstream 											inputRead(fileName);
-	t_state 														*currentState;
-	char 																currentChar;
-	char 																lastChar;
-	bool 																isAccepted;
-	bool 																readChar;
+	std::ifstream 		inputRead(fileName);
+	char 				currentChar, nextChar;
+	t_state*			currentState;
+	t_state*			nextState;
+	std::streampos		lastPosition, LAPosition;
+	std::vector<AAutomata *>::iterator it;
+
 
 	if (!inputRead.is_open())
 	{
 		std::cerr << "Unable to open file: " << fileName << std::endl;
 		return (-1);
 	}
-	while (inputRead.good())
-	{
-		isAccepted = false;
-		readChar = true;
-		if (readChar)
-		{
-			inputRead.get(currentChar);
-			lastChar = currentChar;
-		}
+	while(inputRead.good()){
+		lastPosition	= inputRead.tellg();
 		it = this->_automata.begin();
-		while (it != this->_automata.end())
+		while(it != this->_automata.end() && inputRead.good())
 		{
 			currentState = (*it)->getInitialState();
-			while (!isAccepted)
+			while (inputRead.good())
 			{
+				inputRead.get(currentChar);
 				currentState = (*it)->transition(currentState, currentChar);
-				if (currentState != NULL)
-				{
-					if (currentState->isFinal)
-					{
-						inputRead.get(currentChar);
-						if (currentChar == ' ' || currentChar == '\t' || currentChar == '\n')
-						{
-							isAccepted = true;
-							std::cout << "automata accepted: " << (*it)->getName()
-												<< std::endl;
-						}
-						else if ((*it)->transition(currentState, currentChar) == NULL)
-						{
-							isAccepted = true;
-							readChar = false;
-							std::cout << "automata accepted: " << (*it)->getName()
-												<< std::endl;
-						}
+				if(currentState!=NULL && currentState->isFinal){
+					// Lookahead
+					LAPosition	= inputRead.tellg();
+					inputRead.get(nextChar);
+					nextState = (*it)->transition(currentState, nextChar);
+					inputRead.seekg (LAPosition);
+					if(nextState==NULL){
+						// Finish
+						std::cout << currentChar << " LEXEMA ACEPTADO - Automata: " << (*it)->getName() << std::endl;
+						lastPosition	= inputRead.tellg();
+						it = this->_automata.begin();
+						break;
 					}
+				}else if(currentState!=NULL && !currentState->isFinal){
+					// Not Final, just keep reading
+				}else{
+					// NULL, Check with next Automata
+					inputRead.seekg (lastPosition);
+					break;
 				}
-				break;
 			}
-			if (!readChar || isAccepted)
-				break;
-			++it;
+			it++;
+		}
+		if(inputRead.good()){
+			inputRead.get(currentChar);
 		}
 	}
 	return (0);
