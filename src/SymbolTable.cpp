@@ -1,3 +1,6 @@
+#include 	<fstream>
+#include 	<iostream>
+#include 	<iomanip>
 #include 	"SymbolTable.hh"
 
 SymbolTable::SymbolTable()
@@ -47,4 +50,17 @@ std::multimap<std::string, std::string> & SymbolTable::getSymTable()
 
 void SymbolTable::writeToFile()
 {
+	std::multimap<std::string, std::string>::iterator 	it;
+	std::ofstream 																			outputFile;
+
+	outputFile.open("symbolTable.txt", std::ios::out);
+	if (outputFile.is_open())
+	{
+		outputFile << "Type" << std::setw(25) << "Lexeme" << std::endl;
+		for (it = this->_symTable.begin(); it != this->_symTable.end(); ++it)
+			outputFile << it->first << " ==> " << it->second << std::endl;
+		outputFile.close();
+	}
+	else
+		std::cerr << "Unable to create symbolTable.txt" << std::endl;
 }

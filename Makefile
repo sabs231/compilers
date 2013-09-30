@@ -19,9 +19,11 @@ CXX			=		g++
 
 NAME		=		analex
 
+FILE_NAME	=		symbolTable.txt
+
 CXXFLAGS	+=		-I./include
 
-CXXFLAGS	+=		-W -Wall -Wextra -Werror -g3
+CXXFLAGS	+=		-W -Wall -Wextra -Werror
 
 all:				$(NAME)
 
@@ -33,6 +35,7 @@ clean:
 
 fclean:				clean
 					rm -f $(NAME)
+					rm -f $(FILE_NAME)
 
 re:					fclean all
 

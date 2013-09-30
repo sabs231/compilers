@@ -13,8 +13,9 @@ int 							main(int argc, char **argv)
 		return (-1);
 	}
 	a.run(argv[1]);
-	std::cout << "printing symTable" << std::endl;
+	std::cout << "Printing Symbol Table" << std::endl;
 	for (it = tab->getSymTable().begin(); it != tab->getSymTable().end(); ++it)
 		std::cout << it->first << " ==> " << it->second << std::endl;
+	tab->writeToFile();
 	return (0);
 }
