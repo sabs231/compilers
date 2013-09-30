@@ -24,7 +24,6 @@ ReservedAutomata::ReservedAutomata(std::string name)
 	this->_stateIndex.insert(std::pair<char, int>('P', 15));
 	this->_stateIndex.insert(std::pair<char, int>('Q', 16));
 	this->_stateIndex.insert(std::pair<char, int>('R', 17));
-	
 	this->_symbolIndex.insert(std::pair<char, int>('c', 0));
 	this->_symbolIndex.insert(std::pair<char, int>('o', 1));
 	this->_symbolIndex.insert(std::pair<char, int>('u', 2));
@@ -39,7 +38,6 @@ ReservedAutomata::ReservedAutomata(std::string name)
 	this->_symbolIndex.insert(std::pair<char, int>('f', 11));
 	this->_symbolIndex.insert(std::pair<char, int>('a', 12));
 	this->_symbolIndex.insert(std::pair<char, int>('r', 13));
-
 	this->_transitionTable = new t_state*[this->_stateNum];
 	for (unsigned int i = 0; i < this->_stateNum; i++)
 		this->_transitionTable[i] = new t_state[this->_symbolNum];
@@ -58,33 +56,26 @@ ReservedAutomata::ReservedAutomata(std::string name)
 	this->_transitionTable[0][3].name = 'J';
 	this->_transitionTable[0][7].name = 'L';
 	this->_transitionTable[0][12].name = 'M';
-	
 	this->_transitionTable[14][1].name = 'P';
 	this->_transitionTable[15][2].name = 'Q';
 	this->_transitionTable[16][3].name = 'R';
 	this->_transitionTable[17][4].name = 'F';
 	this->_transitionTable[17][4].isFinal = true;
-	
 	this->_transitionTable[1][6].name = 'C';
 	this->_transitionTable[2][7].name = 'D';
 	this->_transitionTable[3][8].name = 'E';
 	this->_transitionTable[4][9].name = 'F';
 	this->_transitionTable[4][9].isFinal = true;
-	
 	this->_transitionTable[7][8].name = 'I';
 	this->_transitionTable[8][10].name = 'E';
-	
 	this->_transitionTable[9][7].name = 'K';
 	this->_transitionTable[10][8].name = 'F';
 	this->_transitionTable[10][8].isFinal = true;
-
 	this->_transitionTable[11][11].name = 'F';
 	this->_transitionTable[11][11].isFinal = true;
-	
 	this->_transitionTable[12][13].name = 'N';
 	this->_transitionTable[13][13].name = 'F';
 	this->_transitionTable[13][13].isFinal = true;
-
 }
 
 ReservedAutomata::ReservedAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name)
@@ -98,6 +89,7 @@ ReservedAutomata::~ReservedAutomata()
 		delete [] this->_transitionTable;
 }
 
-char ReservedAutomata::simplifySymbol(char currentSymbol) const{
-	return currentSymbol;
+char ReservedAutomata::simplifySymbol(char currentSymbol) const
+{
+	return (currentSymbol);
 }

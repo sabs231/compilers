@@ -10,7 +10,6 @@ IdAutomata::IdAutomata(std::string name)
 	this->_stateIndex.insert(std::pair<char, int>('B', 1));
 	this->_symbolIndex.insert(std::pair<char, int>('N', 0));
 	this->_symbolIndex.insert(std::pair<char, int>('L', 1));
-
 	this->_transitionTable = new t_state*[this->_stateNum];
 	for (unsigned int i = 0; i < this->_stateNum; i++)
 		this->_transitionTable[i] = new t_state[this->_symbolNum];
@@ -37,12 +36,13 @@ IdAutomata::~IdAutomata()
 		delete [] this->_transitionTable;
 }
 
-char IdAutomata::simplifySymbol(char currentSymbol) const{
-	if((currentSymbol >= 'a' && currentSymbol <= 'z') || (currentSymbol >= 'A' && currentSymbol <= 'Z')){
-		return 'L';
-	}else if((currentSymbol >= '0' && currentSymbol <= '9') ){
-		return 'N';
-	}else{
-		return '#';
-	}
+char IdAutomata::simplifySymbol(char currentSymbol) const
+{
+	if ((currentSymbol >= 'a' && currentSymbol <= 'z') || (currentSymbol >= 'A' && currentSymbol <= 'Z'))
+		return ('L');
+	else if ((currentSymbol >= '0' && currentSymbol <= '9'))
+		return ('N');
+	else
+		return ('#');
+	
 }

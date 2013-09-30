@@ -13,7 +13,6 @@ StringAutomata::StringAutomata(std::string name)
 	this->_symbolIndex.insert(std::pair<char, int>('L', 1));
 	this->_symbolIndex.insert(std::pair<char, int>(' ', 2));
 	this->_symbolIndex.insert(std::pair<char, int>('"', 3));
-
 	this->_transitionTable = new t_state*[this->_stateNum];
 	for (unsigned int i = 0; i < this->_stateNum; i++)
 		this->_transitionTable[i] = new t_state[this->_symbolNum];
@@ -44,14 +43,14 @@ StringAutomata::~StringAutomata()
 		delete [] this->_transitionTable;
 }
 
-char StringAutomata::simplifySymbol(char currentSymbol) const{
-	if((currentSymbol >= 'a' && currentSymbol <= 'z') || (currentSymbol >= 'A' && currentSymbol <= 'Z')){
-		return 'L';
-	}else if((currentSymbol >= '0' && currentSymbol <= '9') ){
-		return 'N';
-	}else if(currentSymbol == '<' || currentSymbol == '>' || currentSymbol == '/' || currentSymbol == '&'){
-		return 'N';
-	}else{
-		return currentSymbol;
-	}
+char StringAutomata::simplifySymbol(char currentSymbol) const
+{
+	if ((currentSymbol >= 'a' && currentSymbol <= 'z') || (currentSymbol >= 'A' && currentSymbol <= 'Z'))
+		return ('L');
+	else if ((currentSymbol >= '0' && currentSymbol <= '9'))
+		return ('N');
+	else if (currentSymbol == '<' || currentSymbol == '>' || currentSymbol == '/' || currentSymbol == '&')
+		return ('N');
+	else
+		return (currentSymbol);
 }

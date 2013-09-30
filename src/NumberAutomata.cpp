@@ -11,7 +11,7 @@ NumberAutomata::NumberAutomata(std::string name)
 	this->_symbolIndex.insert(std::pair<char, int>('N', 0));
 	this->_transitionTable = new t_state*[this->_stateNum];
 	for (unsigned int i = 0; i < this->_stateNum; i++)
-		this->_transitionTable[i] = new t_state[this->_symbolNum]; // Number
+		this->_transitionTable[i] = new t_state[this->_symbolNum];
 	for (unsigned int i = 0; i < this->_stateNum; i++)
 	{
 		for (unsigned int j = 0; j < this->_symbolNum; j++)
@@ -35,8 +35,8 @@ NumberAutomata::~NumberAutomata()
 
 char NumberAutomata::simplifySymbol(char currentSymbol) const
 {
-	if((currentSymbol >= '0' && currentSymbol <= '9') )
-		return 'N';
+	if ((currentSymbol >= '0' && currentSymbol <= '9'))
+		return ('N');
 	else
-		return '#';
+		return ('#');
 }

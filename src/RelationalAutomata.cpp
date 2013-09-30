@@ -12,7 +12,6 @@ RelationalAutomata::RelationalAutomata(std::string name)
 	this->_symbolIndex.insert(std::pair<char, int>('=', 0));
 	this->_symbolIndex.insert(std::pair<char, int>('>', 1));
 	this->_symbolIndex.insert(std::pair<char, int>('<', 2));
-
 	this->_transitionTable = new t_state*[this->_stateNum];
 	for (unsigned int i = 0; i < this->_stateNum; i++)
 		this->_transitionTable[i] = new t_state[this->_symbolNum];
@@ -45,6 +44,7 @@ RelationalAutomata::~RelationalAutomata()
 		delete [] this->_transitionTable;
 }
 
-char RelationalAutomata::simplifySymbol(char currentSymbol) const{
-	return currentSymbol;
+char RelationalAutomata::simplifySymbol(char currentSymbol) const
+{
+	return (currentSymbol);
 }

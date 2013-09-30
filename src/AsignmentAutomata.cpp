@@ -9,7 +9,6 @@ AsignmentAutomata::AsignmentAutomata(std::string name)
 	this->_stateIndex.insert(std::pair<char, int>('A', 0));
 	this->_stateIndex.insert(std::pair<char, int>('B', 1));
 	this->_symbolIndex.insert(std::pair<char, int>('=', 0));
-
 	this->_transitionTable = new t_state*[this->_stateNum];
 	for (unsigned int i = 0; i < this->_stateNum; i++)
 		this->_transitionTable[i] = new t_state[this->_symbolNum];
@@ -36,6 +35,7 @@ AsignmentAutomata::~AsignmentAutomata()
 		delete [] this->_transitionTable;
 }
 
-char AsignmentAutomata::simplifySymbol(char currentSymbol) const{
-	return currentSymbol;
+char AsignmentAutomata::simplifySymbol(char currentSymbol) const
+{
+	return (currentSymbol);
 }
