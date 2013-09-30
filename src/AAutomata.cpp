@@ -70,9 +70,11 @@ int AAutomata::getSymbolIndex(char currentSymbol) const
 
 t_state 	*AAutomata::getInitialState() const
 {
-	if (this->_transitionTable)
-		return (&this->_transitionTable[0][0]);
-	return (NULL);
+	t_state 	*st = new t_state;
+
+	st->name = 'A';
+	st->isFinal = false;
+	return (st);
 }
 
 char AAutomata::simplifySymbol(char currentSymbol) const
