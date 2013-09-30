@@ -24,16 +24,16 @@ Analex::Analex()
 	AAutomata *agrupation	= new AgrupationAutomata();
 	AAutomata *output		= new OutputAutomata();
 	AAutomata *reserved		= new ReservedAutomata();
-	_automata.push_back(numbers);
-	_automata.push_back(ids);
-	_automata.push_back(strings);
-	_automata.push_back(arithmetic);
-	_automata.push_back(relational);
-	_automata.push_back(asignment);
-	_automata.push_back(punctuation);
-	_automata.push_back(agrupation);
-	_automata.push_back(output);
-	_automata.push_back(reserved);
+	this->_automata.push_back(numbers);
+	this->_automata.push_back(ids);
+	this->_automata.push_back(strings);
+	this->_automata.push_back(arithmetic);
+	this->_automata.push_back(relational);
+	this->_automata.push_back(asignment);
+	this->_automata.push_back(punctuation);
+	this->_automata.push_back(agrupation);
+	this->_automata.push_back(output);
+	this->_automata.push_back(reserved);
 	
 	/* XXX Testing Transition Tables, dont delete
 	std::cout << "Number Automata" << std::endl;
@@ -82,8 +82,13 @@ std::vector<AAutomata *> & Analex::getAutomata()
 
 int Analex::run(char *fileName)
 {
-	std::ifstream 	inputRead(fileName);
-	char 						currentChar;
+	std::vector<AAutomata *>::iterator 	it;
+	std::ifstream 											inputRead(fileName);
+	t_state 														*currentState;
+	char 																currentChar;
+	char 																lastChar;
+	bool 																isAccepted;
+	bool 																readChar;
 
 	if (!inputRead.is_open())
 	{
@@ -92,8 +97,44 @@ int Analex::run(char *fileName)
 	}
 	while (inputRead.good())
 	{
-		inputRead.get(currentChar);
-		std::cout << currentChar << std::endl;;
+		isAccepted = false;
+		readChar = true;
+		if (readChar)
+		{
+			inputRead.get(currentChar);
+			lastChar = currentChar;
+		}
+		it = this->_automata.begin();
+		while (it != this->_automata.end())
+		{
+			currentState = (*it)->getInitialState();
+			while (!isAccepted)
+			{
+				currentState = (*it)->transition(currentState, currentChar);
+				if (currentState != NULL)
+				{
+					if (currentState->isFinal)
+					{
+						inputRead.get(currentChar);
+						if (currentChar == ' ' || currentChar == '\t' || currentChar == '\n')
+						{
+							isAccepted = true;
+							std::cout << "automata accepted" << std::endl;
+						}
+						else if ((*it)->transition(currentState, currentChar) == NULL)
+						{
+							isAccepted = true;
+							readChar = false;
+							std::cout << "automata accepted" << std::endl;
+						}
+					}
+				}
+				break;
+			}
+			if (!readChar || isAccepted)
+				break;
+			++it;
+		}
 	}
 	return (0);
 }
