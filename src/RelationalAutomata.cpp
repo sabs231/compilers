@@ -1,8 +1,8 @@
 #include 	"RelationalAutomata.hh"
 
 
-RelationalAutomata::RelationalAutomata()
-	: AAutomata()
+RelationalAutomata::RelationalAutomata(std::string name)
+	: AAutomata(name)
 {
 	this->_stateNum = 3;
 	this->_symbolNum = 3;
@@ -34,8 +34,8 @@ RelationalAutomata::RelationalAutomata()
 
 }
 
-RelationalAutomata::RelationalAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum)
-	: AAutomata(transitionTable, stateNum, symbolNum)
+RelationalAutomata::RelationalAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name)
+	: AAutomata(transitionTable, stateNum, symbolNum, name)
 {
 }
 

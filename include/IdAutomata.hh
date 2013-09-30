@@ -6,8 +6,8 @@
 class 	IdAutomata : public AAutomata
 {
 	public:
-		IdAutomata();
-		IdAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum);
+		IdAutomata(std::string name);
+		IdAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name);
 		~IdAutomata();
 		virtual char simplifySymbol(char currentSymbol) const;
 };

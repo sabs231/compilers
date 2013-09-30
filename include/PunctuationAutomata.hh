@@ -4,10 +4,10 @@
 # include 	"AAutomata.hh"
 
 class 	PunctuationAutomata : public AAutomata
-{
+{	
 	public:
-		PunctuationAutomata();
-		PunctuationAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum);
+		PunctuationAutomata(std::string name);
+		PunctuationAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name);
 		~PunctuationAutomata();
 		virtual char simplifySymbol(char currentSymbol) const;
 };

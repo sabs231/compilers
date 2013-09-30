@@ -2,11 +2,12 @@
 #include 	<iostream>
 #include 	"AAutomata.hh"
 
-AAutomata::AAutomata()
+AAutomata::AAutomata(std::string name)
 {
 	this->_transitionTable = NULL;
 	this->_stateNum = 0;
 	this->_symbolNum = 0;
+	this->_automataName = name;
 }
 
 AAutomata::AAutomata(AAutomata const & other)
@@ -18,8 +19,8 @@ AAutomata::AAutomata(AAutomata const & other)
 	this->_symbolIndex = other._symbolIndex;
 }
 
-AAutomata::AAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum)
-	: _transitionTable(transitionTable), _stateNum(stateNum), _symbolNum(symbolNum)
+AAutomata::AAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name)
+	: _transitionTable(transitionTable), _stateNum(stateNum), _symbolNum(symbolNum), _automataName(name)
 {
 }
 
@@ -70,9 +71,10 @@ int AAutomata::getSymbolIndex(char currentSymbol) const
 
 t_state 	*AAutomata::getInitialState() const
 {
-	if (this->_transitionTable)
-		return (&this->_transitionTable[0][0]);
-	return (NULL);
+	t_state* st = new t_state;
+	st->name = 'A';
+	st->isFinal = false;
+	return (st);
 }
 
 char AAutomata::simplifySymbol(char currentSymbol) const
@@ -102,4 +104,8 @@ void AAutomata::printTransitionTable()
 		}
 		std::cout << std::endl;
 	}
+}
+
+std::string AAutomata::getName() const{
+	return this->_automataName;
 }

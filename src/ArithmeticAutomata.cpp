@@ -1,8 +1,8 @@
 #include 	"ArithmeticAutomata.hh"
 
 
-ArithmeticAutomata::ArithmeticAutomata()
-	: AAutomata()
+ArithmeticAutomata::ArithmeticAutomata(std::string name)
+	: AAutomata(name)
 {
 	this->_stateNum = 2;
 	this->_symbolNum = 1;
@@ -25,8 +25,8 @@ ArithmeticAutomata::ArithmeticAutomata()
 	this->_transitionTable[0][0].isFinal = true;
 }
 
-ArithmeticAutomata::ArithmeticAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum)
-	: AAutomata(transitionTable, stateNum, symbolNum)
+ArithmeticAutomata::ArithmeticAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name)
+	: AAutomata(transitionTable, stateNum, symbolNum, name)
 {
 }
 

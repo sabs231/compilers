@@ -6,8 +6,8 @@
 class 	ArithmeticAutomata : public AAutomata
 {
 	public:
-		ArithmeticAutomata();
-		ArithmeticAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum);
+		ArithmeticAutomata(std::string name);
+		ArithmeticAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name);
 		~ArithmeticAutomata();
 		virtual char simplifySymbol(char currentSymbol) const;
 };

@@ -4,10 +4,10 @@
 # include 	"AAutomata.hh"
 
 class 	ReservedAutomata : public AAutomata
-{
+{		
 	public:
-		ReservedAutomata();
-		ReservedAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum);
+		ReservedAutomata(std::string name);
+		ReservedAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name);
 		~ReservedAutomata();
 		virtual char simplifySymbol(char currentSymbol) const;
 };

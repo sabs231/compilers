@@ -2,6 +2,7 @@
 # define _AAUTOMATA_HH_
 
 # include 								<map>
+# include 								<string>
 
 typedef struct 						s_state
 {
@@ -12,16 +13,17 @@ typedef struct 						s_state
 class 										AAutomata
 {
 	protected:
-		t_state 							**_transitionTable;
-		unsigned int 					_stateNum;
-		unsigned int 					_symbolNum;
+		t_state 				**_transitionTable;
+		unsigned int 			_stateNum;
+		unsigned int 			_symbolNum;
 		std::map<char, int> 	_stateIndex;
 		std::map<char, int> 	_symbolIndex;
+		std::string				_automataName;
 
 	public:
-		AAutomata();
+		AAutomata(std::string name);
 		AAutomata(AAutomata const & other);
-		AAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum); 
+		AAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name); 
 		AAutomata & operator=(AAutomata const & other);
 		virtual ~AAutomata() {}
 		t_state *getInitialState() const;
@@ -32,6 +34,7 @@ class 										AAutomata
 		t_state *transition(t_state *currentState, char nextChar);
 		virtual char simplifySymbol(char currentSymbol) const;
 		void printTransitionTable();
+		std::string getName() const;
 };
 
 #endif

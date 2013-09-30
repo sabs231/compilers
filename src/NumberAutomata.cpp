@@ -1,8 +1,8 @@
 #include 	"NumberAutomata.hh"
 
 
-NumberAutomata::NumberAutomata()
-	: AAutomata()
+NumberAutomata::NumberAutomata(std::string name)
+	: AAutomata(name)
 {
 	this->_stateNum = 2;
 	this->_symbolNum = 1;
@@ -22,8 +22,8 @@ NumberAutomata::NumberAutomata()
 	}
 }
 
-NumberAutomata::NumberAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum)
-	: AAutomata(transitionTable, stateNum, symbolNum)
+NumberAutomata::NumberAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name)
+	: AAutomata(transitionTable, stateNum, symbolNum, name)
 {
 }
 

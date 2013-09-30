@@ -1,8 +1,8 @@
 #include 	"AsignmentAutomata.hh"
 
 
-AsignmentAutomata::AsignmentAutomata()
-	: AAutomata()
+AsignmentAutomata::AsignmentAutomata(std::string name)
+	: AAutomata(name)
 {
 	this->_stateNum = 2;
 	this->_symbolNum = 1;
@@ -25,8 +25,8 @@ AsignmentAutomata::AsignmentAutomata()
 	this->_transitionTable[0][0].isFinal = true;
 }
 
-AsignmentAutomata::AsignmentAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum)
-	: AAutomata(transitionTable, stateNum, symbolNum)
+AsignmentAutomata::AsignmentAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name)
+	: AAutomata(transitionTable, stateNum, symbolNum, name)
 {
 }
 

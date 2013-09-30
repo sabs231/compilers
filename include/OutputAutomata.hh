@@ -6,8 +6,8 @@
 class 	OutputAutomata : public AAutomata
 {
 	public:
-		OutputAutomata();
-		OutputAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum);
+		OutputAutomata(std::string name);
+		OutputAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name);
 		~OutputAutomata();
 		virtual char simplifySymbol(char currentSymbol) const;
 };

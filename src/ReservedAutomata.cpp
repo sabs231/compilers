@@ -1,8 +1,8 @@
 #include 	"ReservedAutomata.hh"
 
 
-ReservedAutomata::ReservedAutomata()
-	: AAutomata()
+ReservedAutomata::ReservedAutomata(std::string name)
+	: AAutomata(name)
 {
 	this->_stateNum = 18;
 	this->_symbolNum = 14;
@@ -87,8 +87,8 @@ ReservedAutomata::ReservedAutomata()
 
 }
 
-ReservedAutomata::ReservedAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum)
-	: AAutomata(transitionTable, stateNum, symbolNum)
+ReservedAutomata::ReservedAutomata(t_state **transitionTable, unsigned int stateNum, unsigned int symbolNum, std::string name)
+	: AAutomata(transitionTable, stateNum, symbolNum, name)
 {
 }
 
