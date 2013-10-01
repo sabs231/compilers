@@ -99,14 +99,13 @@ int Analex::run(char *fileName)
 					if (nextState == NULL)
 					{
 						// Finish
-						std::cout << lexeme << " - Aceptado para el automata " << (*it)->getName() << std::endl;
 						this->_symTab->insert((*it)->getName(), lexeme);
 						lastPosition = inputRead.tellg();
-						std::cout << "LEXEME " 
+						std::cout << "Lexeme |" 
 											<< lexeme 
-											<< " ACCEPTED " 
+											<< "| Accepted - " 
 											<< (*it)->getName() 
-											<< " AUTOMATA" << std::endl;
+											<< " Automata" << std::endl;
 						it = this->_automata.begin();
 						lexeme.erase();
 						accepted = true;
