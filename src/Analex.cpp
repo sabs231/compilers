@@ -99,6 +99,7 @@ int Analex::run(char *fileName)
 					if (nextState == NULL)
 					{
 						// Finish
+						std::cout << lexeme << " - Aceptado para el automata " << (*it)->getName() << std::endl;
 						this->_symTab->insert((*it)->getName(), lexeme);
 						lastPosition = inputRead.tellg();
 						it = this->_automata.begin();
