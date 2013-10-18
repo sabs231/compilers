@@ -1,20 +1,11 @@
-#include 					<iostream>
-#include 					"Analex.hh"
+#include "mainwindow.h"
+#include <QApplication>
 
-int 							main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-	SymbolTable 		*tab = new SymbolTable();
-	Analex 					a(tab);
-	std::string 		automata("Number");
-	std::multimap<std::string, std::string>::iterator 	it;
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
 
-	if (argc != 2)
-	{
-		std::cout << "Usage: " << argv[0] << " [file name]" << std::endl;
-		return (-1);
-	}
-	a.run(argv[1]);
-	std::cout << "Symbol Table written to symbolTable.txt" << std::endl;
-	tab->writeToFile();
-	return (0);
+    return a.exec();
 }
