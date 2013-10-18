@@ -391,8 +391,7 @@ clean:compiler_clean
 	-$(DEL_FILE) *~ core *.core
 	rm -f $(MY_OBJS)
 	rm -f $(MY_NAME)
-	rm -f $(FILE_NAME)
-
+	rm -f $(MY_FILE_NAME)
 
 ####### Sub-libraries
 
