@@ -145,8 +145,8 @@ DIST          = /Applications/Qt/5.1.1/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/features/exceptions.prf \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/features/yacc.prf \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/features/lex.prf \
-		../compiler/compiler.pro \
-		../compiler/compiler.pro
+		compiler.pro \
+		compiler.pro
 QMAKE_TARGET  = compiler
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = compiler
