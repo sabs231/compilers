@@ -1,4 +1,4 @@
-(CONTADOR, 2, T1)
+(%, CONTADOR, 2, T1)
 (==, T1, 0, T2)
 (IFN, T2, _, GOTO[9])
 (PRINT, "<html><body>", _, _)
