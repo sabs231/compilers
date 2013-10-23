@@ -32,7 +32,7 @@ CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefau
 DEFINES       = -DQT_NO_DEBUG -DQT_WEBKITWIDGETS_LIB -DQT_QUICK_LIB -DQT_OPENGL_LIB -DQT_PRINTSUPPORT_LIB -DQT_WEBKIT_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_SENSORS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -mmacosx-version-min=10.6 -Wall -W -fPIE $(DEFINES)
 CXXFLAGS      = -I./include -pipe -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -mmacosx-version-min=10.6 -Wall -W -fPIE $(DEFINES)
-INCPATH       = -I/Applications/Qt/5.1.1/clang_64/mkspecs/macx-clang -I../compiler -I/Applications/Qt/5.1.1/clang_64/include -I/Applications/Qt/5.1.1/clang_64/include/QtWebKitWidgets -I/Applications/Qt/5.1.1/clang_64/lib/QtWebKitWidgets.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtQuick -I/Applications/Qt/5.1.1/clang_64/lib/QtQuick.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtOpenGL -I/Applications/Qt/5.1.1/clang_64/lib/QtOpenGL.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtPrintSupport -I/Applications/Qt/5.1.1/clang_64/lib/QtPrintSupport.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtWebKit -I/Applications/Qt/5.1.1/clang_64/lib/QtWebKit.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtQml -I/Applications/Qt/5.1.1/clang_64/lib/QtQml.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtWidgets -I/Applications/Qt/5.1.1/clang_64/lib/QtWidgets.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtNetwork -I/Applications/Qt/5.1.1/clang_64/lib/QtNetwork.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtSensors -I/Applications/Qt/5.1.1/clang_64/lib/QtSensors.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtGui -I/Applications/Qt/5.1.1/clang_64/lib/QtGui.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtCore -I/Applications/Qt/5.1.1/clang_64/lib/QtCore.framework/Versions/5/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I. -F/Applications/Qt/5.1.1/clang_64/lib
+INCPATH       = -I/Applications/Qt/5.1.1/clang_64/mkspecs/macx-clang -Isrc/ -I/Applications/Qt/5.1.1/clang_64/include -I/Applications/Qt/5.1.1/clang_64/include/QtWebKitWidgets -I/Applications/Qt/5.1.1/clang_64/lib/QtWebKitWidgets.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtQuick -I/Applications/Qt/5.1.1/clang_64/lib/QtQuick.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtOpenGL -I/Applications/Qt/5.1.1/clang_64/lib/QtOpenGL.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtPrintSupport -I/Applications/Qt/5.1.1/clang_64/lib/QtPrintSupport.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtWebKit -I/Applications/Qt/5.1.1/clang_64/lib/QtWebKit.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtQml -I/Applications/Qt/5.1.1/clang_64/lib/QtQml.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtWidgets -I/Applications/Qt/5.1.1/clang_64/lib/QtWidgets.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtNetwork -I/Applications/Qt/5.1.1/clang_64/lib/QtNetwork.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtSensors -I/Applications/Qt/5.1.1/clang_64/lib/QtSensors.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtGui -I/Applications/Qt/5.1.1/clang_64/lib/QtGui.framework/Versions/5/Headers -I/Applications/Qt/5.1.1/clang_64/include/QtCore -I/Applications/Qt/5.1.1/clang_64/lib/QtCore.framework/Versions/5/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I. -F/Applications/Qt/5.1.1/clang_64/lib
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -headerpad_max_install_names -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -mmacosx-version-min=10.6
 LIBS          = $(SUBLIBS) -F/Applications/Qt/5.1.1/clang_64/lib -framework QtWebKitWidgets -framework QtQuick -framework QtQml -framework QtNetwork -framework QtCore -framework QtGui -framework QtOpenGL -framework QtWidgets -framework QtPrintSupport -framework Cocoa -framework QtWebKit -framework QtSql -framework QtSensors -framework OpenGL -framework AGL 
@@ -145,8 +145,8 @@ DIST          = /Applications/Qt/5.1.1/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/features/exceptions.prf \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/features/yacc.prf \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/features/lex.prf \
-		compiler.pro \
-		compiler.pro
+		src/compiler.pro \
+		src/compiler.pro
 QMAKE_TARGET  = compiler
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = compiler
@@ -193,7 +193,7 @@ $(TARGET): ui_mainwindow.h $(OBJECTS)
 	@test -d compiler.app/Contents/MacOS/ || mkdir -p compiler.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
-Makefile: compiler.pro /Applications/Qt/5.1.1/clang_64/mkspecs/macx-clang/qmake.conf /Applications/Qt/5.1.1/clang_64/mkspecs/features/spec_pre.prf \
+Makefile: src/compiler.pro /Applications/Qt/5.1.1/clang_64/mkspecs/macx-clang/qmake.conf /Applications/Qt/5.1.1/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/qdevice.pri \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/features/device_config.prf \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/common/shell-unix.conf \
@@ -265,7 +265,7 @@ Makefile: compiler.pro /Applications/Qt/5.1.1/clang_64/mkspecs/macx-clang/qmake.
 		/Applications/Qt/5.1.1/clang_64/mkspecs/features/exceptions.prf \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/features/yacc.prf \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/features/lex.prf \
-		compiler.pro \
+		src/compiler.pro \
 		/Applications/Qt/5.1.1/clang_64/lib/QtWebKitWidgets.framework/QtWebKitWidgets.prl \
 		/Applications/Qt/5.1.1/clang_64/lib/QtQuick.framework/QtQuick.prl \
 		/Applications/Qt/5.1.1/clang_64/lib/QtQml.framework/QtQml.prl \
@@ -278,7 +278,7 @@ Makefile: compiler.pro /Applications/Qt/5.1.1/clang_64/mkspecs/macx-clang/qmake.
 		/Applications/Qt/5.1.1/clang_64/lib/QtWebKit.framework/QtWebKit.prl \
 		/Applications/Qt/5.1.1/clang_64/lib/QtSql.framework/QtSql.prl \
 		/Applications/Qt/5.1.1/clang_64/lib/QtSensors.framework/QtSensors.prl
-	$(QMAKE) -spec macx-clang CONFIG+=x86_64 -o Makefile compiler.pro
+	$(QMAKE) -spec macx-clang CONFIG+=x86_64 -o Makefile src/compiler.pro
 /Applications/Qt/5.1.1/clang_64/mkspecs/features/spec_pre.prf:
 /Applications/Qt/5.1.1/clang_64/mkspecs/qdevice.pri:
 /Applications/Qt/5.1.1/clang_64/mkspecs/features/device_config.prf:
@@ -351,7 +351,7 @@ Makefile: compiler.pro /Applications/Qt/5.1.1/clang_64/mkspecs/macx-clang/qmake.
 /Applications/Qt/5.1.1/clang_64/mkspecs/features/exceptions.prf:
 /Applications/Qt/5.1.1/clang_64/mkspecs/features/yacc.prf:
 /Applications/Qt/5.1.1/clang_64/mkspecs/features/lex.prf:
-compiler.pro:
+src/compiler.pro:
 /Applications/Qt/5.1.1/clang_64/lib/QtWebKitWidgets.framework/QtWebKitWidgets.prl:
 /Applications/Qt/5.1.1/clang_64/lib/QtQuick.framework/QtQuick.prl:
 /Applications/Qt/5.1.1/clang_64/lib/QtQml.framework/QtQml.prl:
@@ -365,7 +365,7 @@ compiler.pro:
 /Applications/Qt/5.1.1/clang_64/lib/QtSql.framework/QtSql.prl:
 /Applications/Qt/5.1.1/clang_64/lib/QtSensors.framework/QtSensors.prl:
 qmake: FORCE
-	@$(QMAKE) -spec macx-clang CONFIG+=x86_64 -o Makefile compiler.pro
+	@$(QMAKE) -spec macx-clang CONFIG+=x86_64 -o Makefile src/compiler.pro
 
 qmake_all: FORCE
 
@@ -383,7 +383,8 @@ compiler.app/Contents/Info.plist:
 	@sed -e "s,@SHORT_VERSION@,1.0,g" -e "s,@TYPEINFO@,????,g" -e "s,@ICON@,,g" -e "s,@EXECUTABLE@,compiler,g" -e "s,@TYPEINFO@,????,g" /Applications/Qt/5.1.1/clang_64/mkspecs/macx-clang/Info.plist.app >compiler.app/Contents/Info.plist
 dist: 
 	@test -d .tmp/compiler1.0.0 || mkdir -p .tmp/compiler1.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/compiler1.0.0/ && $(COPY_FILE) --parents ../compiler/mainwindow.h ../compiler/cuadruple.h .tmp/compiler1.0.0/ && $(COPY_FILE) --parents ../compiler/main.cpp ../compiler/mainwindow.cpp ../compiler/cuadruple.cpp .tmp/compiler1.0.0/ && $(COPY_FILE) --parents ../compiler/mainwindow.ui .tmp/compiler1.0.0/ && (cd `dirname .tmp/compiler1.0.0` && $(TAR) compiler1.0.0.tar compiler1.0.0 && $(COMPRESS) compiler1.0.0.tar) && $(MOVE) `dirname .tmp/compiler1.0.0`/compiler1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/compiler1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/compiler1.0.0/ && $(COPY_FILE) --parents src/mainwindow.h src/cuadruple.h .tmp/compiler1.0.0/ && $(COPY_FILE) --parents src/main.cpp src/mainwindow.cpp src/cuadruple.cpp .tmp/compiler1.0.0/ && $(COPY_FILE) --parents src/mainwindow.ui .tmp/compiler1.0.0/ && (cd `dirname .tmp/compiler1.0.0` && $(TAR) compiler1.0.0.tar compiler1.0.0 && $(COMPRESS) compiler1.0.0.tar) && $(MOVE) `dirname .tmp/compiler1.0.0`/compiler1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/compiler1.0.0
+
 
 
 clean:compiler_clean 
@@ -525,17 +526,17 @@ moc_mainwindow.cpp: /Applications/Qt/5.1.1/clang_64/include/QtWidgets/QMainWindo
 		/Applications/Qt/5.1.1/clang_64/include/QtGui/qtouchdevice.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtWidgets/qtabwidget.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtGui/qicon.h \
-		../compiler/mainwindow.h
-	/Applications/Qt/5.1.1/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 $(INCPATH) ../compiler/mainwindow.h -o moc_mainwindow.cpp
+		src/mainwindow.h
+	/Applications/Qt/5.1.1/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 $(INCPATH) src/mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
 compiler_uic_make_all: ui_mainwindow.h
 compiler_uic_clean:
 	-$(DEL_FILE) ui_mainwindow.h
-ui_mainwindow.h: ../compiler/mainwindow.ui \
+ui_mainwindow.h: src/mainwindow.ui \
 		/Applications/Qt/5.1.1/clang_64/include/QtWebKitWidgets/QWebView
-	/Applications/Qt/5.1.1/clang_64/bin/uic ../compiler/mainwindow.ui -o ui_mainwindow.h
+	/Applications/Qt/5.1.1/clang_64/bin/uic src/mainwindow.ui -o ui_mainwindow.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -549,7 +550,7 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
-main.o: ../compiler/main.cpp ../compiler/mainwindow.h \
+main.o: src/main.cpp src/mainwindow.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtWidgets/QMainWindow \
 		/Applications/Qt/5.1.1/clang_64/include/QtWidgets/qmainwindow.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtWidgets/qwidget.h \
@@ -668,9 +669,9 @@ main.o: ../compiler/main.cpp ../compiler/mainwindow.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtWidgets/qdesktopwidget.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtGui/qguiapplication.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtGui/qinputmethod.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../compiler/main.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o src/main.cpp
 
-mainwindow.o: ../compiler/mainwindow.cpp ../compiler/mainwindow.h \
+mainwindow.o: src/mainwindow.cpp src/mainwindow.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtWidgets/QMainWindow \
 		/Applications/Qt/5.1.1/clang_64/include/QtWidgets/qmainwindow.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtWidgets/qwidget.h \
@@ -783,13 +784,13 @@ mainwindow.o: ../compiler/mainwindow.cpp ../compiler/mainwindow.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtWidgets/qtabwidget.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtGui/qicon.h \
 		ui_mainwindow.h \
-		../compiler/cuadruple.h \
+		src/cuadruple.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtCore/QString \
 		/Applications/Qt/5.1.1/clang_64/include/QtCore/QVector \
 		/Applications/Qt/5.1.1/clang_64/include/QtCore/QDebug
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../compiler/mainwindow.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o src/mainwindow.cpp
 
-cuadruple.o: ../compiler/cuadruple.cpp ../compiler/cuadruple.h \
+cuadruple.o: src/cuadruple.cpp src/cuadruple.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtCore/QString \
 		/Applications/Qt/5.1.1/clang_64/include/QtCore/qstring.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtCore/qchar.h \
@@ -834,7 +835,7 @@ cuadruple.o: ../compiler/cuadruple.cpp ../compiler/cuadruple.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtCore/qnamespace.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtCore/qarraydata.h \
 		/Applications/Qt/5.1.1/clang_64/include/QtCore/qstringbuilder.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cuadruple.o ../compiler/cuadruple.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cuadruple.o src/cuadruple.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
