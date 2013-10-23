@@ -193,7 +193,7 @@ $(TARGET): ui_mainwindow.h $(OBJECTS)
 	@test -d compiler.app/Contents/MacOS/ || mkdir -p compiler.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
-Makefile: ../compiler/compiler.pro /Applications/Qt/5.1.1/clang_64/mkspecs/macx-clang/qmake.conf /Applications/Qt/5.1.1/clang_64/mkspecs/features/spec_pre.prf \
+Makefile: compiler.pro /Applications/Qt/5.1.1/clang_64/mkspecs/macx-clang/qmake.conf /Applications/Qt/5.1.1/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/qdevice.pri \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/features/device_config.prf \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/common/shell-unix.conf \
@@ -265,7 +265,7 @@ Makefile: ../compiler/compiler.pro /Applications/Qt/5.1.1/clang_64/mkspecs/macx-
 		/Applications/Qt/5.1.1/clang_64/mkspecs/features/exceptions.prf \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/features/yacc.prf \
 		/Applications/Qt/5.1.1/clang_64/mkspecs/features/lex.prf \
-		../compiler/compiler.pro \
+		compiler.pro \
 		/Applications/Qt/5.1.1/clang_64/lib/QtWebKitWidgets.framework/QtWebKitWidgets.prl \
 		/Applications/Qt/5.1.1/clang_64/lib/QtQuick.framework/QtQuick.prl \
 		/Applications/Qt/5.1.1/clang_64/lib/QtQml.framework/QtQml.prl \
@@ -278,7 +278,7 @@ Makefile: ../compiler/compiler.pro /Applications/Qt/5.1.1/clang_64/mkspecs/macx-
 		/Applications/Qt/5.1.1/clang_64/lib/QtWebKit.framework/QtWebKit.prl \
 		/Applications/Qt/5.1.1/clang_64/lib/QtSql.framework/QtSql.prl \
 		/Applications/Qt/5.1.1/clang_64/lib/QtSensors.framework/QtSensors.prl
-	$(QMAKE) -spec macx-clang CONFIG+=x86_64 -o Makefile ../compiler/compiler.pro
+	$(QMAKE) -spec macx-clang CONFIG+=x86_64 -o Makefile compiler.pro
 /Applications/Qt/5.1.1/clang_64/mkspecs/features/spec_pre.prf:
 /Applications/Qt/5.1.1/clang_64/mkspecs/qdevice.pri:
 /Applications/Qt/5.1.1/clang_64/mkspecs/features/device_config.prf:
@@ -351,7 +351,7 @@ Makefile: ../compiler/compiler.pro /Applications/Qt/5.1.1/clang_64/mkspecs/macx-
 /Applications/Qt/5.1.1/clang_64/mkspecs/features/exceptions.prf:
 /Applications/Qt/5.1.1/clang_64/mkspecs/features/yacc.prf:
 /Applications/Qt/5.1.1/clang_64/mkspecs/features/lex.prf:
-../compiler/compiler.pro:
+compiler.pro:
 /Applications/Qt/5.1.1/clang_64/lib/QtWebKitWidgets.framework/QtWebKitWidgets.prl:
 /Applications/Qt/5.1.1/clang_64/lib/QtQuick.framework/QtQuick.prl:
 /Applications/Qt/5.1.1/clang_64/lib/QtQml.framework/QtQml.prl:
@@ -365,7 +365,7 @@ Makefile: ../compiler/compiler.pro /Applications/Qt/5.1.1/clang_64/mkspecs/macx-
 /Applications/Qt/5.1.1/clang_64/lib/QtSql.framework/QtSql.prl:
 /Applications/Qt/5.1.1/clang_64/lib/QtSensors.framework/QtSensors.prl:
 qmake: FORCE
-	@$(QMAKE) -spec macx-clang CONFIG+=x86_64 -o Makefile ../compiler/compiler.pro
+	@$(QMAKE) -spec macx-clang CONFIG+=x86_64 -o Makefile compiler.pro
 
 qmake_all: FORCE
 
