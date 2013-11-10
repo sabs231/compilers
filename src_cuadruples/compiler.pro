@@ -5,10 +5,9 @@
 #-------------------------------------------------
 
 QT       += core gui
-QT += webkitwidgets
+QT       += webkit webkitwidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
 
 TARGET = compiler
 TEMPLATE = app
@@ -16,9 +15,25 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    cuadruple.cpp
+    cuadruple.cpp \
+    cuaarithmetic.cpp \
+    cuaprint.cpp \
+    cualogic.cpp \
+    cuaend.cpp \
+    cuaasign.cpp \
+    cuaindex.cpp \
+    cuaifnot.cpp \
+    cuagoto.cpp
 
 HEADERS  += mainwindow.h \
-    cuadruple.h
+    cuadruple.h \
+    cuaarithmetic.h \
+    cuaprint.h \
+    cualogic.h \
+    cuaend.h \
+    cuaasign.h \
+    cuaindex.h \
+    cuaifnot.h \
+    cuagoto.h
 
 FORMS    += mainwindow.ui

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <QDebug>
 #include "cuadruple.h"
 
 Cuadruple::Cuadruple()
@@ -13,10 +14,10 @@ Cuadruple::Cuadruple()
 Cuadruple::Cuadruple(int i, QString f, QString s, QString t, QString fo)
 {
     this->id = i;
-    this->first = f.remove('(');
-    this->second = s;
-    this->third = t;
-    this->fourth = fo.remove(')');
+    this->first = f.trimmed();
+    this->second = s.trimmed();
+    this->third = t.trimmed();
+    this->fourth = fo.remove(')').trimmed();
 }
 
 Cuadruple::~Cuadruple()
@@ -63,7 +64,11 @@ void Cuadruple::setFourth(QString str)
     this->fourth = str;
 }
 
-QString Cuadruple::toString() const
+void Cuadruple::toString() const
 {
-    return QString("(" + this->first + "," + this->second + "," + this->third + "," + this->fourth + ")");
+    qDebug() << this->id << ": "
+             << this->first << " "
+             << this->second << " "
+             << this->third << " "
+             << this->fourth << " ";
 }

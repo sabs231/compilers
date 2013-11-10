@@ -3,15 +3,17 @@
 
 #include <string>
 #include <QString>
+#include <QMap>
 
 class Cuadruple
 {
-private:
-    int         id;
+protected:
+    int     id;
     QString first;
     QString second;
     QString third;
     QString fourth;
+
 public:
     Cuadruple();
     Cuadruple(int, QString, QString, QString, QString);
@@ -24,7 +26,8 @@ public:
     void setSecond(QString);
     void setThird(QString);
     void setFourth(QString);
-    QString toString() const;
+    void toString() const;
+    virtual void doOperation(QString &, QMap<QString, QString> &, int &) = 0;
 };
 
 #endif // CUADRUPLE_H
