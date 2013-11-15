@@ -1,22 +1,26 @@
 #ifndef _SYMBOLTABLE_HH_
 # define _SYMBOLTABLE_HH_
 
-# include 																		<map>
-# include 																		<string>
+# include 	<vector>
+#include 	"SymbolTable.hh"
+#include 	"Lexema.hh"
 
-class 																				SymbolTable
-{
+class 	SymbolTable{
 	protected:
-		std::multimap<std::string, std::string> 	_symTable;
+		std::vector<Lexema> _symTable;
+		unsigned int _indexOffset;
 	public:
 		SymbolTable();
 		SymbolTable(SymbolTable const &);
 		SymbolTable & operator=(SymbolTable const &);
 		~SymbolTable();
-		void insert(std::string, std::string);
-		std::string *lookup(std::string &);
-		std::multimap<std::string, std::string> & getSymTable();
+		void insert(Lexema);
 		void writeToFile();
+		Lexema getLexema();
+		Lexema lookAheadLexema(int lookahead=0);
+		void offsetBack();
+		int getSize();
+		int getOffset();
 };
 
 #endif

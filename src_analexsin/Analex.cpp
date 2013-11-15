@@ -59,8 +59,9 @@ std::vector<AAutomata *> & Analex::getAutomata()
 	return (this->_automata);
 }
 
-int Analex::run(char *fileName)
-{
+int Analex::run(char *fileName){
+	int lexemeCount = 0;
+	std::cout << std::endl << "Iniciando Análisis Léxico" << std::endl << std::endl;
 	std::ifstream 											inputRead(fileName);
 	char 																currentChar;
 	char 																nextChar;
@@ -99,9 +100,9 @@ int Analex::run(char *fileName)
 					if (nextState == NULL)
 					{
 						// Finish
-						this->_symTab->insert((*it)->getName(), lexeme);
+						this->_symTab->insert(Lexema((*it)->getName(), lexeme));
 						lastPosition = inputRead.tellg();
-						std::cout << "Lexeme |" 
+						std::cout << (lexemeCount++) << " Lexeme |" 
 											<< lexeme 
 											<< "| Accepted - " 
 											<< (*it)->getName() 
@@ -128,5 +129,6 @@ int Analex::run(char *fileName)
 		if (inputRead.good())
 			inputRead.get(currentChar);
 	}
+	this->_symTab->insert(Lexema("$","END"));
 	return (0);
 }

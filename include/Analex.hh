@@ -1,16 +1,16 @@
 #ifndef _ANALEX_HH_
 # define _ANALEX_HH_
 
-#include 																<vector>
-#include 																<string>
-#include 																"AAutomata.hh"
-#include 																"SymbolTable.hh"
+#include 	<vector>
+#include 	<string>
+#include 	"AAutomata.hh"
+#include 	"SymbolTable.hh"
 
-class 																	Analex
+class 		Analex
 {
 	protected:
-		SymbolTable 												*_symTab;
-		std::vector<AAutomata *> 						_automata;
+		SymbolTable 				*_symTab;
+		std::vector<AAutomata *> 	_automata;
 	public:
 		Analex(SymbolTable *);
 		Analex(Analex const &);

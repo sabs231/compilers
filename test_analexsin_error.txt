@@ -1,6 +1,6 @@
-arr a = [1,2,"a",4,"lala",nil];
+arr a = [1,2,"a",4,"lala" nil];
 count i = 0;
-while(contador < 5){
+while(contador < 5 %% 2){
 	if(contador % 2 == 0){
 		@"<h1>";
 		@a[contador];
