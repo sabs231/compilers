@@ -6,6 +6,7 @@
 class CuadrupleGenerator{
 	protected:
 		LexemeTable *_lexTab;
+		unsigned int Tcount;
 	public:
 		CuadrupleGenerator(LexemeTable *);
 		CuadrupleGenerator(CuadrupleGenerator const &);

@@ -3,15 +3,19 @@
 #define		DEBUG	0
 
 CuadrupleGenerator::CuadrupleGenerator(LexemeTable *symTab): _lexTab(symTab){
+	Tcount = 0;
 }
 
 CuadrupleGenerator::CuadrupleGenerator(CuadrupleGenerator const &other){
 	this->_lexTab = other._lexTab;
+	Tcount = 0;
 }
 
 CuadrupleGenerator & CuadrupleGenerator::operator=(CuadrupleGenerator const &other){
-	if (this != &other)
+	if (this != &other){
 		this->_lexTab = other._lexTab;
+		Tcount = other.Tcount;
+	}
 	return (*this);
 }
 
@@ -20,6 +24,7 @@ CuadrupleGenerator::~CuadrupleGenerator(){
 
 int CuadrupleGenerator::run(LexemeTable *lexTab){
 	this->_lexTab = lexTab;
+	Tcount	= 0;
 	if(this->_lexTab == NULL){
 		return(0);
 	}
@@ -62,7 +67,7 @@ int CuadrupleGenerator::Sentencia(){
 		countCuadruples += Impresion();
 		countCuadruples += Sentencia();
 	}else if(nextLexema._tipo == "Agrupation" && nextLexema._valor == "}"){
-		// Es la derivación a nada
+		// 02) Sentencia -> €
 	}else if(nextLexema._tipo == "$"){
 		// Ya terminé :)
 	}
@@ -87,7 +92,7 @@ int CuadrupleGenerator::EControl(){
 		BloqueS();
 		BloqueE();
 	}
-	return 1;
+	return 0;
 }
 
 int CuadrupleGenerator::Declaracion(){
@@ -111,7 +116,7 @@ int CuadrupleGenerator::Declaracion(){
 		Lexema lasignment	= this->_lexTab->getLexema();
 		Lexema lnumber		= this->_lexTab->getLexema();
 		Lexema lpunctuation = this->_lexTab->getLexema();
-		std::cout << "(=," << lid._valor << "," << lnumber._valor << ",T#)" << std::endl;
+		std::cout << "(=," << lid._valor << "," << lnumber._valor << ", _)" << std::endl;
 		countCuadruples = 1;
 	}
 	return countCuadruples;
@@ -124,14 +129,14 @@ int CuadrupleGenerator::Listid(int index, std::string idName){
 		//11) Listid -> number ListidP
 		// (=, a[0], 1, T1)
 		Lexema lnumber	= this->_lexTab->getLexema();
-		std::cout << "(=," << idName << "[" << index << "]," << lnumber._valor << ",T#)" << std::endl;
+		std::cout << "(=," << idName << "[" << index << "]," << lnumber._valor << ", _)" << std::endl;
 		countCuadruples++;
 		countCuadruples += ListidP(index+1, idName);
 	}else if(nextLexema._tipo == "String"){
 		//10) Listid -> string ListidP
 		// (=, a[0], "string", T1)
 		Lexema lString	= this->_lexTab->getLexema();
-		std::cout << "(=," << idName << "[" << index << "],\"" << lString._valor << "\",T#)" << std::endl;
+		std::cout << "(=," << idName << "[" << index << "]," << lString._valor << ", _)" << std::endl;
 		countCuadruples++;
 		countCuadruples += ListidP(index+1, idName);		
 	}
@@ -157,7 +162,7 @@ int CuadrupleGenerator::BloqueS(){
 	ParseToken(Lexema("Agrupation","{"),true);
 	Sentencia();
 	ParseToken(Lexema("Agrupation","}"),true);
-	return 1;
+	return 0;
 }
 
 int CuadrupleGenerator::BloqueE(){
@@ -176,11 +181,8 @@ int CuadrupleGenerator::BloqueE(){
 			nextLexema._tipo == "$"){
 		// 16) BloqueE -> €
 		// No hago nada
-	}else{
-		std::cout << "Error sintáctico, se esperaba : else, id, }, output, while, if, arr, count y se obtuvo: " << nextLexema._tipo << " ("<< nextLexema._valor <<")["<< this->_lexTab->getOffset() <<"]" << std::endl;
-		return 0;
 	}
-	return 1;
+	return 0;
 }
 
 int CuadrupleGenerator::Condicion(){
@@ -188,7 +190,7 @@ int CuadrupleGenerator::Condicion(){
 	Expresion();
 	ParseToken(Lexema("Relational",""),false);
 	Expresion();
-	return 1;
+	return 0;
 }
 
 int CuadrupleGenerator::Expresion(){
@@ -212,21 +214,21 @@ int CuadrupleGenerator::Expresion(){
 		std::cout << "Error sintáctico, se esperaba : Id, number y se obtuvo: " << nextLexema._tipo << " ("<< nextLexema._valor <<")["<< this->_lexTab->getOffset() <<"]" << std::endl;
 		return 0;
 	}
-	return 1;
+	return 0;
 }
 
 int CuadrupleGenerator::Aarr(){
 	// 21) Aarr -> id AarrP
 	ParseToken(Lexema("Id",""),false);
 	AarrP();
-	return 1;
+	return 0;
 }
 
 int CuadrupleGenerator::AarrP(){
 	// 22) AarrP -> [ AarrP2
 	ParseToken(Lexema("Agrupation","["),true);
 	AarrP2();
-	return 1;
+	return 0;
 }
 
 int CuadrupleGenerator::AarrP2(){
@@ -239,11 +241,8 @@ int CuadrupleGenerator::AarrP2(){
 		// 24) AarrP2 -> number ]
 		ParseToken(Lexema("Number",""),false);
 		ParseToken(Lexema("Agrupation","]"),true);
-	}else{
-		std::cout << "Error sintáctico, se esperaba : Id, Number y se obtuvo: " << nextLexema._tipo << " ("<< nextLexema._valor <<")["<< this->_lexTab->getOffset() <<"]" << std::endl;
-		return 0;
 	}
-	return 1;
+	return 0;
 }
 
 int CuadrupleGenerator::Operacion(){
@@ -263,11 +262,8 @@ int CuadrupleGenerator::Operacion(){
 			Expresion();
 			ParseToken(Lexema("Punctuation",";"),true);
 		}
-	}else{
-		std::cout << "Error sintáctico, se esperaba : Id y se obtuvo: " << nextLexema._tipo << " ("<< nextLexema._valor <<")["<< this->_lexTab->getOffset() <<"]" << std::endl;
-		return 0;
 	}
-	return 1;
+	return 0;
 }
 
 int CuadrupleGenerator::Operador(){
@@ -281,58 +277,68 @@ int CuadrupleGenerator::Operador(){
 			(nextLexema._tipo == "Punctuation" && nextLexema._valor == ";")){
 		// 28) Operador  -> €
 		// No hago nada
-	}else{
-		std::cout << "Error sintáctico, se esperaba : Arithmetic, Relational, ) o ; y se obtuvo: " << nextLexema._tipo << " ("<< nextLexema._valor <<")["<< this->_lexTab->getOffset() <<"]" << std::endl;
-		return 0;
 	}
-	return 1;
+	return 0;
 }
 
 int CuadrupleGenerator::Impresion(){
+	int countCuadruples = 0;
 	// 29) Impresion -> output ImpresionP
-	ParseToken(Lexema("Output",""),false);
-	ImpresionP();
-	return 1;
+	this->_lexTab->getLexema();
+	countCuadruples += ImpresionP();
+	return countCuadruples;
 }
 
 int CuadrupleGenerator::ImpresionP(){
+	int countCuadruples = 0;
 	Lexema nextLexema 		= this->_lexTab->lookAheadLexema();
 	Lexema nextnextLexema	= this->_lexTab->lookAheadLexema(1);
 	if(nextLexema._tipo == "String"){
 		// 32) ImpresionP ->	string ImpresionE
-		ParseToken(Lexema("String",""),false);
-		ImpresionE();
+		// (PRINT, "String", _, _)
+		Lexema lString = this->_lexTab->getLexema();
+		std::cout << "(PRINT," << lString._valor << ", _, _)" << std::endl;
+		countCuadruples++;
+		countCuadruples += ImpresionE();
 	}else if(nextLexema._tipo == "Id"){
 		if(nextnextLexema._tipo == "Agrupation" && nextnextLexema._valor == "["){
 			// 30) ImpresionP ->	Aarr ImpresionE
-			Aarr();
-			ImpresionE();
+			// Nos saltamos Aarr() y obtenemos los 2 cuadruplos que necesitamos
+			Lexema lId = this->_lexTab->getLexema();
+			Lexema lAgrup01 = this->_lexTab->getLexema();
+			Lexema lIdOrNumber = this->_lexTab->getLexema();
+			Lexema lAgrup02 = this->_lexTab->getLexema();
+			std::cout << "([]," << lId._valor << "," << lIdOrNumber._valor << ", T"<< Tcount <<")" << std::endl;
+			std::cout << "(PRINT, T" << Tcount << ", _, _)" << std::endl;
+			Tcount++;
+			countCuadruples += 2;
+			countCuadruples += ImpresionE();
 		}else{
 			// 31) ImpresionP ->	id ImpresionE
-			ParseToken(Lexema("Id",""),false);
-			ImpresionE();
+			// (PRINT, id, _, _)
+			Lexema lId = this->_lexTab->getLexema();
+			std::cout << "(PRINT," << lId._valor << ", _, _)" << std::endl;
+			countCuadruples++;
+			countCuadruples += ImpresionE();
 		}
-	}else {
-		std::cout << "Error sintáctico, se esperaba : Id, String y se obtuvo: " << nextLexema._tipo << " ("<< nextLexema._valor <<")["<< this->_lexTab->getOffset() <<"]" << std::endl;
-		return 0;
 	}
-	return 1;
+	return countCuadruples;
 }
 
 int CuadrupleGenerator::ImpresionE(){
+	int countCuadruples = 0;
 	Lexema nextLexema = this->_lexTab->lookAheadLexema();
 	if(nextLexema._tipo == "Punctuation" && nextLexema._valor == ";"){
 		// 33) ImpresionE-> ;
-		ParseToken(Lexema("Punctuation",";"),true);
+		this->_lexTab->getLexema();
 	}else if(nextLexema._tipo == "Output"){
 		// 34) ImpresionE-> output;
-		ParseToken(Lexema("Output",""),false);
-		ParseToken(Lexema("Punctuation",";"),true);
-	}else{
-		std::cout << "Error sintáctico, se esperaba ; output y se obtuvo: " << nextLexema._tipo << " ("<< nextLexema._valor <<")["<< this->_lexTab->getOffset() <<"]" << std::endl;
-		return 0;
+		this->_lexTab->getLexema();
+		this->_lexTab->getLexema();
+		std::cout << "(PRINT,\"\\n\", _, _)" << std::endl;
+		countCuadruples++;
 	}
-	return 1;
+	return countCuadruples;
 }
 
 

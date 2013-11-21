@@ -21,7 +21,8 @@ int main(int argc, char **argv){
 	/*	Run Anasin 	*/
 	if(anasin.run(tab)){
 		std::cout << "Gramática Aceptada" << std::endl;
-		cuadrupleGenerator.run(tab);
+		int numgenerados = cuadrupleGenerator.run(tab);
+		std::cout << std::endl << "Cuádruplos generados: " << numgenerados << std::endl;
 		//cuadrupleGenerator->writeToFile();
 	}else{
 		std::cout << "Gramática Denegada" << std::endl;
