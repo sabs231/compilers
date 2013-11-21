@@ -1,24 +1,24 @@
-#ifndef _ANASIN_HH_
-# define _ANASIN_HH_
+#ifndef _CUADRUPLEGEN_HH_
+# define _CUADRUPLEGEN_HH_
 
 #include "LexemeTable.hh"
 
-class Anasin{
+class CuadrupleGenerator{
 	protected:
-		LexemeTable *_symTab;
+		LexemeTable *_lexTab;
 	public:
-		Anasin(LexemeTable *);
-		Anasin(Anasin const &);
-		Anasin & operator=(Anasin const &);
-		~Anasin();
+		CuadrupleGenerator(LexemeTable *);
+		CuadrupleGenerator(CuadrupleGenerator const &);
+		CuadrupleGenerator & operator=(CuadrupleGenerator const &);
+		~CuadrupleGenerator();
 		
 		int run(LexemeTable *);
 		int ParseToken(Lexema lexemaEsperado, bool checkVal);
 		int Sentencia();
 		int EControl();
 		int Declaracion();
-		int Listid();
-		int ListidP();
+		int Listid(int index, std::string idName);
+		int ListidP(int index, std::string idName);
 		int BloqueS();
 		int BloqueE();
 		int Condicion();

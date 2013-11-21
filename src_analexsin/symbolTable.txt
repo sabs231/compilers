@@ -1,4 +1,9 @@
 Type                   Lexeme
+Reserved ==> count
+Id ==> contador
+Asignment ==> =
+Number ==> 0
+Punctuation ==> ;
 Reserved ==> arr
 Id ==> a
 Asignment ==> =
@@ -15,19 +20,14 @@ String ==> "lala"
 Reserved ==> nil
 Agrupation ==> ]
 Punctuation ==> ;
-Reserved ==> count
-Id ==> i
-Asignment ==> =
-Number ==> 0
+Output ==> @
+String ==> "<html><body>"
 Punctuation ==> ;
 Reserved ==> while
 Agrupation ==> (
 Id ==> contador
 Relational ==> <
 Number ==> 5
-Arithmetic ==> %
-Arithmetic ==> %
-Number ==> 2
 Agrupation ==> )
 Agrupation ==> {
 Reserved ==> if
@@ -75,5 +75,7 @@ Id ==> contador
 Arithmetic ==> +
 Number ==> 1
 Punctuation ==> ;
-Agrupation ==> }
+Output ==> @
+String ==> "</body></html>"
+Punctuation ==> ;
 $ ==> END

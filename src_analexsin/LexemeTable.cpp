@@ -1,31 +1,31 @@
 #include 	<fstream>
 #include 	<iostream>
 #include 	<iomanip>
-#include 	"SymbolTable.hh"
+#include 	"LexemeTable.hh"
 
-SymbolTable::SymbolTable(){
+LexemeTable::LexemeTable(){
 	this->_indexOffset = 0;
 }
 
-SymbolTable::SymbolTable(SymbolTable const &other){
+LexemeTable::LexemeTable(LexemeTable const &other){
 	this->_indexOffset = 0;
 	this->_symTable = other._symTable;
 }
 
-SymbolTable & SymbolTable::operator=(SymbolTable const &other){
+LexemeTable & LexemeTable::operator=(LexemeTable const &other){
 	if (this != &other)
 		this->_symTable = other._symTable;
 	return (*this);
 }
 
-SymbolTable::~SymbolTable(){
+LexemeTable::~LexemeTable(){
 }
 
-void SymbolTable::insert(Lexema newLexema){
+void LexemeTable::insert(Lexema newLexema){
 	this->_symTable.push_back(newLexema);
 }
 
-void SymbolTable::writeToFile(){
+void LexemeTable::writeToFile(){
 	std::vector<Lexema>::iterator it;
 	std::ofstream	outputFile;
 	outputFile.open("symbolTable.txt", std::ios::out);
@@ -38,24 +38,28 @@ void SymbolTable::writeToFile(){
 		std::cerr << "Unable to create symbolTable.txt" << std::endl;
 }
 
-Lexema SymbolTable::getLexema(){
+Lexema LexemeTable::getLexema(){
 	if(this->_indexOffset >= this->_symTable.size()){
 		return Lexema("$","");
 	}
 	return this->_symTable.at(this->_indexOffset++);
 }
 
-Lexema SymbolTable::lookAheadLexema(int lookahead){
+Lexema LexemeTable::lookAheadLexema(int lookahead){
 	if(this->_indexOffset >= this->_symTable.size()){
 		return Lexema("$","");
 	}
 	return this->_symTable.at(this->_indexOffset + lookahead);
 }
 
-int SymbolTable::getSize(){
+int LexemeTable::getSize(){
 	return this->_symTable.size();
 }
 
-int SymbolTable::getOffset(){
+int LexemeTable::getOffset(){
 	return this->_indexOffset;
+}
+
+void LexemeTable::resetOffset(){
+	this->_indexOffset = 0;
 }

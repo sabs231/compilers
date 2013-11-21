@@ -2,7 +2,7 @@
 #include 	"Anasin.hh"
 #define		DEBUG	0
 
-Anasin::Anasin(SymbolTable *symTab): _symTab(symTab){
+Anasin::Anasin(LexemeTable *symTab): _symTab(symTab){
 }
 
 Anasin::Anasin(Anasin const &other){
@@ -18,12 +18,12 @@ Anasin & Anasin::operator=(Anasin const &other){
 Anasin::~Anasin(){
 }
 
-int Anasin::run(SymbolTable *symTab){
+int Anasin::run(LexemeTable *symTab){
 	this->_symTab = symTab;
 	if(this->_symTab == NULL){
 		return(0);
 	}
-	std::cout << std::endl << "Iniciando Análisis Sintáctico" << std::endl << std::endl;
+	std::cout << std::endl << "-- Iniciando Análisis Sintáctico --" << std::endl << std::endl;
 	return Sentencia();
 }
 

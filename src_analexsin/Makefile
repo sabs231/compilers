@@ -12,16 +12,17 @@ SRC		=	AAutomata.cpp		\
 			RelationalAutomata.cpp	\
 			ReservedAutomata.cpp	\
 			StringAutomata.cpp	\
-			SymbolTable.cpp		\
+			LexemeTable.cpp		\
+			CuadrupleGenerator.cpp		\
 			main.cpp
 
 OBJS		=	$(SRC:.cpp=.o)
 
-CXX		=	g++
+CXX			=	g++
 
 NAME		=	analexsin
 
-FILE_NAME	=	temporaryFiles.txt
+FILE_NAME	=	symbolTable.txt
 
 CXXFLAGS	+=	-I../include
 

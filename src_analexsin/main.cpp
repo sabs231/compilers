@@ -1,11 +1,13 @@
 #include <iostream>
 #include "Analex.hh"
 #include "Anasin.hh"
+#include "CuadrupleGenerator.hh"
 
 int main(int argc, char **argv){
-	SymbolTable *tab = new SymbolTable();
+	LexemeTable *tab = new LexemeTable();
 	Analex 		analex(tab);
 	Anasin		anasin(tab);
+	CuadrupleGenerator	cuadrupleGenerator(tab);
 
 	if (argc != 2){
 		std::cout << "Uso: " << argv[0] << " [file name]" << std::endl;
@@ -19,6 +21,8 @@ int main(int argc, char **argv){
 	/*	Run Anasin 	*/
 	if(anasin.run(tab)){
 		std::cout << "Gramática Aceptada" << std::endl;
+		cuadrupleGenerator.run(tab);
+		//cuadrupleGenerator->writeToFile();
 	}else{
 		std::cout << "Gramática Denegada" << std::endl;
 	}

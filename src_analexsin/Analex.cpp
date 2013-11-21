@@ -12,7 +12,7 @@
 #include	"OutputAutomata.hh"
 #include	"ReservedAutomata.hh"
 
-Analex::Analex(SymbolTable *symTab)
+Analex::Analex(LexemeTable *symTab)
 	: _symTab(symTab)
 {
 	AAutomata *numbers 		= new NumberAutomata(std::string("Number"));
@@ -61,7 +61,7 @@ std::vector<AAutomata *> & Analex::getAutomata()
 
 int Analex::run(char *fileName){
 	int lexemeCount = 0;
-	std::cout << std::endl << "Iniciando Análisis Léxico" << std::endl << std::endl;
+	std::cout << std::endl << "-- Iniciando Análisis Léxico --" << std::endl << std::endl;
 	std::ifstream 											inputRead(fileName);
 	char 																currentChar;
 	char 																nextChar;

@@ -1,5 +1,7 @@
+count contador = 1;
 arr a = [1,2,"a",4,"lala" nil];
-count i = 0;
+contador=contador-1;
+@"<html><body>";
 while(contador < 5){
 	if(contador % 2 == 0){
 		@"<h1>";
@@ -12,3 +14,4 @@ while(contador < 5){
 	}
 	contador=contador+1;
 }
+@"</body></html>";
