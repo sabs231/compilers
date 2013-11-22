@@ -31,7 +31,7 @@ int CuadrupleGenerator::run(LexemeTable *lexTab){
 	}
 	std::cout << std::endl << "-- Iniciando Generador de Cuádruplos --" << std::endl << std::endl;
 	this->_lexTab->resetOffset();
-	this->Cuadruples = Sentencia(0);
+	this->Cuadruples = Sentencia(1);
 	return Cuadruples.size();
 }
 
@@ -397,7 +397,7 @@ std::list<std::string> CuadrupleGenerator::ImpresionE(){
 		this->_lexTab->getLexema();
 		this->_lexTab->getLexema();
 		std::ostringstream cuadruploPrintLnStream;
-		cuadruploPrintLnStream << "(PRINT,\"\\n\", _, _)";
+		cuadruploPrintLnStream << "(PRINT,\"<br>\", _, _)";
 		newCuadruples.push_back(cuadruploPrintLnStream.str());
 	}
 	return newCuadruples;
@@ -415,7 +415,7 @@ void CuadrupleGenerator::writeToFile(){
 		std::cerr << "Unable to create cuadruplesTable.txt" << std::endl;
 }
 void CuadrupleGenerator::printCuadruples(){
-	unsigned int i = 0;
+	unsigned int i = 1;
 	for (std::list<std::string>::iterator it=this->Cuadruples.begin(); it != this->Cuadruples.end(); ++it){
 		std::cout << "[" << i++ << "]" <<*it << std::endl;
 	}
