@@ -100,10 +100,10 @@ std::list<std::string> CuadrupleGenerator::EControl(unsigned int currentCount){
 		this->_lexTab->getLexema();
 		ReturnCuadrupleInfo rciCondicion = Condicion();
 		this->_lexTab->getLexema();
-		std::list<std::string> BloqueSList = BloqueS(rciCondicion.Clist.size() + currentCount);
+		std::list<std::string> BloqueSList = BloqueS(rciCondicion.Clist.size() + currentCount + 1); // Mas uno del IF
 		
 		std::ostringstream ifnStream;
-		ifnStream << "(IFN, T" << rciCondicion.Tname << ", goto"<< (rciCondicion.Clist.size() + BloqueSList.size() + currentCount + 2) << ", _)";
+		ifnStream << "(IFN, T" << rciCondicion.Tname << ", goto"<< (rciCondicion.Clist.size() + BloqueSList.size() + currentCount + 2) << ", _)"; // Mas dos del If y del GOTO
 
 		newCuadruples.splice(newCuadruples.end(), rciCondicion.Clist);
 		newCuadruples.push_back(ifnStream.str());
@@ -123,8 +123,8 @@ std::list<std::string> CuadrupleGenerator::EControl(unsigned int currentCount){
 		this->_lexTab->getLexema();
 		ReturnCuadrupleInfo rciCondicion = Condicion();
 		this->_lexTab->getLexema();
-		std::list<std::string> BloqueSList = BloqueS(rciCondicion.Clist.size() + currentCount);
-		std::list<std::string> BloqueEList = BloqueE(rciCondicion.Clist.size() + currentCount + BloqueSList.size());
+		std::list<std::string> BloqueSList = BloqueS(rciCondicion.Clist.size() + currentCount + 1); // Mas uno del IF
+		std::list<std::string> BloqueEList = BloqueE(rciCondicion.Clist.size() + currentCount + BloqueSList.size() + 1); // M
 		
 		std::ostringstream ifnStream;
 		ifnStream << "(IFN, T" << rciCondicion.Tname << ", goto"<< (rciCondicion.Clist.size() + BloqueSList.size() + currentCount + 2) << ", _)";
@@ -242,131 +242,108 @@ std::list<std::string> CuadrupleGenerator::BloqueE(unsigned int currentCount){
 
 ReturnCuadrupleInfo CuadrupleGenerator::Condicion(){
 	ReturnCuadrupleInfo newCuadruples;
-	// Come 3 lexemas para este ejemplo
+	/* XXX Come 3 lexemas para este ejemplo
 	this->_lexTab->getLexema();
 	this->_lexTab->getLexema();
 	this->_lexTab->getLexema();
 	newCuadruples.Tname = 0;
 	newCuadruples.Clist.push_back(std::string("(CONDICION,_,_,T0)"));
-	/*
-	// 17) Condicion -> Expresion relational Expresion
-	Expresion();
-	ParseToken(Lexema("Relational",""),false);
-	Expresion();
-	return 0;
 	*/
+	// 17) Condicion -> Expresion relational Expresion
+	ReturnCuadrupleInfo rcil = Expresion();
+	Lexema lRelacional		 = this->_lexTab->getLexema();
+	ReturnCuadrupleInfo rcir = Expresion();
+	std::ostringstream condicionStream;
+	condicionStream << "("<< lRelacional._valor <<", T" << rcil.Tname << ",T"<< rcir.Tname <<", T" << Tcount << ")";
+	newCuadruples.Tname = Tcount++;
+	newCuadruples.Clist.splice (newCuadruples.Clist.end(), rcil.Clist);
+	newCuadruples.Clist.splice (newCuadruples.Clist.end(), rcir.Clist);
+	newCuadruples.Clist.push_back(condicionStream.str());
 	return newCuadruples;
 }
 
-std::list<std::string> CuadrupleGenerator::Expresion(){
-	std::list<std::string> newCuadruples;
-	/*
+ReturnCuadrupleInfo CuadrupleGenerator::Expresion(){
+	ReturnCuadrupleInfo newCuadruples;
 	Lexema nextLexema 		= this->_lexTab->lookAheadLexema();
 	Lexema nextnextLexema	= this->_lexTab->lookAheadLexema(1);
 	if(nextLexema._tipo == "Id"){
 		if(nextnextLexema._tipo == "Agrupation" && nextnextLexema._valor == "["){
 			// 20) Expresion ->	Aarr Operador
-			Aarr();
-			Operador();
+			Lexema lid		= this->_lexTab->getLexema();
+			this->_lexTab->getLexema();
+			Lexema larridx	= this->_lexTab->getLexema();
+			this->_lexTab->getLexema();
+			std::ostringstream arrStream;
+			arrStream << lid._valor << "[" << larridx._valor << "]";
+			newCuadruples = Operador(arrStream.str());
 		}else{
 			// 18) Expresion -> id Operador
-			ParseToken(Lexema("Id",""),false);
-			Operador();
+			Lexema lid		= this->_lexTab->getLexema();
+			newCuadruples = Operador(lid._valor);
 		}
 	}else if(nextLexema._tipo == "Number"){
 		// 19) Expresion -> number Operador
-		ParseToken(Lexema("Number",""),false);
-		Operador();
-	}else{
-		std::cout << "Error sintáctico, se esperaba : Id, number y se obtuvo: " << nextLexema._tipo << " ("<< nextLexema._valor <<")["<< this->_lexTab->getOffset() <<"]" << std::endl;
-		return 0;
+		Lexema lid		= this->_lexTab->getLexema();
+		newCuadruples = Operador(lid._valor);
 	}
-	return 0;
-	*/
 	return newCuadruples;
 }
 
-std::list<std::string> CuadrupleGenerator::Aarr(){
-	/*
-	// 21) Aarr -> id AarrP
-	ParseToken(Lexema("Id",""),false);
-	AarrP();
-	return 0;
-	*/
-	std::list<std::string> newCuadruples;
-	return newCuadruples;
-}
-
-std::list<std::string> CuadrupleGenerator::AarrP(){
-	/*
-	// 22) AarrP -> [ AarrP2
-	ParseToken(Lexema("Agrupation","["),true);
-	AarrP2();
-	return 0;
-	*/
-	std::list<std::string> newCuadruples;
-	return newCuadruples;
-}
-
-std::list<std::string> CuadrupleGenerator::AarrP2(){
-	/*
-	Lexema nextLexema = this->_lexTab->lookAheadLexema();
-	if(nextLexema._tipo == "Id"){
-		// 23) AarrP2 -> id ]
-		ParseToken(Lexema("Id",""),false);
-		ParseToken(Lexema("Agrupation","]"),true);
-	}else if(nextLexema._tipo == "Number"){
-		// 24) AarrP2 -> number ]
-		ParseToken(Lexema("Number",""),false);
-		ParseToken(Lexema("Agrupation","]"),true);
-	}
-	return 0;
-	*/
-	std::list<std::string> newCuadruples;
-	return newCuadruples;
-}
-
-std::list<std::string> CuadrupleGenerator::Operacion(unsigned int currentCount){
-	/*
-	Lexema nextLexema 		= this->_lexTab->lookAheadLexema();
-	Lexema nextnextLexema	= this->_lexTab->lookAheadLexema(1);
-	if(nextLexema._tipo == "Id"){
-		if(nextnextLexema._tipo == "Agrupation" && nextnextLexema._valor == "["){
-			// 26) Operacion -> Aarr=Expresion;
-			Aarr();
-			ParseToken(Lexema("Asignment",""),false);
-			Expresion();
-			ParseToken(Lexema("Punctuation",";"),true);
-		}else{
-			// 25) Operacion -> id=Expresion;
-			ParseToken(Lexema("Id",""),false);
-			ParseToken(Lexema("Asignment",""),false);
-			Expresion();
-			ParseToken(Lexema("Punctuation",";"),true);
-		}
-	}
-	return 0;
-	*/
-	std::list<std::string> newCuadruples;
-	return newCuadruples;
-}
-
-std::list<std::string> CuadrupleGenerator::Operador(){
-	/*
+ReturnCuadrupleInfo CuadrupleGenerator::Operador(std::string leftOperator){
+	ReturnCuadrupleInfo newCuadruples;
 	Lexema nextLexema = this->_lexTab->lookAheadLexema();
 	if(nextLexema._tipo == "Arithmetic"){
 		// 27) Operador  -> arithmetic Expresion
-		ParseToken(Lexema("Arithmetic",""),false);
-		Expresion();
+		Lexema aritmetico = this->_lexTab->getLexema();
+		ReturnCuadrupleInfo rciExpresion = Expresion();
+		std::ostringstream OperatorStream;
+		OperatorStream << "("<< aritmetico._valor <<"," << leftOperator << ",T"<< rciExpresion.Tname <<", T" << Tcount << ")";
+		rciExpresion.Clist.push_back(OperatorStream.str());
+		newCuadruples.Tname = Tcount++;
+		newCuadruples.Clist.splice (newCuadruples.Clist.end(), rciExpresion.Clist);
 	}else if(nextLexema._tipo == "Relational" ||
 			(nextLexema._tipo == "Agrupation" && nextLexema._valor == ")") ||
 			(nextLexema._tipo == "Punctuation" && nextLexema._valor == ";")){
 		// 28) Operador  -> €
 		// No hago nada
+		std::ostringstream OperatorStream;
+		OperatorStream << "(+," << leftOperator << ", 0, T" << Tcount << ")";
+		newCuadruples.Tname = Tcount++;
+		newCuadruples.Clist.push_back(OperatorStream.str());
 	}
-	return 0;
-	*/
+	return newCuadruples;
+}
+
+std::list<std::string> CuadrupleGenerator::Operacion(unsigned int currentCount){
 	std::list<std::string> newCuadruples;
+	Lexema nextLexema 		= this->_lexTab->lookAheadLexema();
+	Lexema nextnextLexema	= this->_lexTab->lookAheadLexema(1);
+	if(nextLexema._tipo == "Id"){
+		if(nextnextLexema._tipo == "Agrupation" && nextnextLexema._valor == "["){
+			// 26) Operacion -> Aarr=Expresion;
+			Lexema lid		= this->_lexTab->getLexema();
+			this->_lexTab->getLexema();
+			Lexema arrCont	= this->_lexTab->getLexema();
+			this->_lexTab->getLexema();
+			this->_lexTab->getLexema();
+			ReturnCuadrupleInfo rciExpresion = Expresion();
+			this->_lexTab->getLexema();
+			newCuadruples.splice (newCuadruples.end(), rciExpresion.Clist);
+			std::ostringstream cuadruploExpresionStream;
+			cuadruploExpresionStream << "(=," << lid._valor << "["<< arrCont._valor <<"], T" << rciExpresion.Tname << ", _)";
+			newCuadruples.push_back(cuadruploExpresionStream.str());
+		}else{
+			// 25) Operacion -> id=Expresion;
+			Lexema lid = this->_lexTab->getLexema();
+			this->_lexTab->getLexema();
+			ReturnCuadrupleInfo rciExpresion = Expresion();
+			this->_lexTab->getLexema();
+			newCuadruples.splice (newCuadruples.end(), rciExpresion.Clist);
+			std::ostringstream cuadruploExpresionStream;
+			cuadruploExpresionStream << "(=," << lid._valor << ", T" << rciExpresion.Tname << ", _)";
+			newCuadruples.push_back(cuadruploExpresionStream.str());
+		}
+	}
 	return newCuadruples;
 }
 

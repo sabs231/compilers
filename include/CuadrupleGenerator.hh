@@ -31,12 +31,9 @@ class CuadrupleGenerator{
 		std::list<std::string> BloqueS(unsigned int currentCount);
 		std::list<std::string> BloqueE(unsigned int currentCount);
 		ReturnCuadrupleInfo Condicion();
-		std::list<std::string> Expresion();
-		std::list<std::string> Aarr();
-		std::list<std::string> AarrP();
-		std::list<std::string> AarrP2();
-		std::list<std::string> Operacion(unsigned int cc);
-		std::list<std::string> Operador();
+		ReturnCuadrupleInfo Expresion();
+		std::list<std::string> Operacion(unsigned int currentCount);
+		ReturnCuadrupleInfo Operador(std::string leftOperator);
 		std::list<std::string> Impresion();
 		std::list<std::string> ImpresionP();
 		std::list<std::string> ImpresionE();

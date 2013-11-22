@@ -16,3 +16,30 @@ while(contador < 5){
 }
 @"</body></html>";
 @contador;
+
+while(contador < 5){
+	@"DENTRO WHILE1";
+	while(contador2 < 5){
+		@"DENTRO WHILE2";
+		while(contador3 < 5){
+			@"DENTRO WHILE3";
+		}
+		@"FUERA WHILE3";
+	}
+	@"FUERA WHILE2";
+}
+@"FUERA WHILE";
+
+if(contador < 1){
+	@"DENTRO IF1";
+	if(contador2 < 2){
+		@"DENTRO IF2";
+	}else{
+		@"DENTRO ELSE2";
+		@"DENTRO ELSE2 AUMENTA";
+	}
+	@"FUERA IF1";
+}else{
+	@"DENTRO ELSE1";
+}
+@"FUERA IF1";
