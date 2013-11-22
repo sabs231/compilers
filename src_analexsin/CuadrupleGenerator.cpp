@@ -1,3 +1,4 @@
+#include 	<fstream>
 #include 	<iostream>
 #include 	"CuadrupleGenerator.hh"
 #define		DEBUG	0
@@ -22,31 +23,16 @@ CuadrupleGenerator & CuadrupleGenerator::operator=(CuadrupleGenerator const &oth
 CuadrupleGenerator::~CuadrupleGenerator(){
 }
 
-std::list<std::string> CuadrupleGenerator::run(LexemeTable *lexTab){
-	std::list<std::string> returnList;
+int CuadrupleGenerator::run(LexemeTable *lexTab){
 	this->_lexTab = lexTab;
 	Tcount	= 0;
 	if(this->_lexTab == NULL){
-		return(returnList);
+		return(Cuadruples.size());
 	}
 	std::cout << std::endl << "-- Iniciando Generador de Cuádruplos --" << std::endl << std::endl;
 	this->_lexTab->resetOffset();
-	returnList = Sentencia(0);
-	return returnList;
-}
-
-int CuadrupleGenerator::ParseToken(Lexema lexemaEsperado, bool checkVal){
-	Lexema nextLexema = this->_lexTab->getLexema();
-	if(nextLexema._tipo == lexemaEsperado._tipo){
-		if(checkVal){
-			if(nextLexema._valor == lexemaEsperado._valor){
-				return 1;
-			}
-		}else{
-			return 1;
-		}
-	}
-	return 0;
+	this->Cuadruples = Sentencia(0);
+	return Cuadruples.size();
 }
 
 std::list<std::string> CuadrupleGenerator::Sentencia(unsigned int currentCount){
@@ -60,7 +46,7 @@ std::list<std::string> CuadrupleGenerator::Sentencia(unsigned int currentCount){
 		newCuadruples.splice (newCuadruples.end(), SentenciaList);
 	}else if(nextLexema._tipo == "Id"){
 		// 02) Sentencia ->	Operacion Sentencia 
-		std::list<std::string> OperacionList = Operacion(currentCount);
+		std::list<std::string> OperacionList = Operacion();
 		newCuadruples.splice (newCuadruples.end(), OperacionList);		
 		std::list<std::string> SentenciaList = Sentencia(currentCount + newCuadruples.size());
 		newCuadruples.splice (newCuadruples.end(), SentenciaList);
@@ -314,7 +300,7 @@ ReturnCuadrupleInfo CuadrupleGenerator::Operador(std::string leftOperator){
 	return newCuadruples;
 }
 
-std::list<std::string> CuadrupleGenerator::Operacion(unsigned int currentCount){
+std::list<std::string> CuadrupleGenerator::Operacion(){
 	std::list<std::string> newCuadruples;
 	(void) currentCount;
 	Lexema nextLexema 		= this->_lexTab->lookAheadLexema();
@@ -418,7 +404,24 @@ std::list<std::string> CuadrupleGenerator::ImpresionE(){
 	return newCuadruples;
 }
 
-
+void CuadrupleGenerator::writeToFile(){
+	std::ofstream	outputFile;
+	outputFile.open("cuadruplesTable.txt", std::ios::out);
+	if (outputFile.is_open()){
+		for (std::list<std::string>::iterator it=this->Cuadruples.begin(); it != this->Cuadruples.end(); ++it){
+			outputFile <<*it << std::endl;
+		}
+		outputFile.close();
+	}else
+		std::cerr << "Unable to create cuadruplesTable.txt" << std::endl;
+}
+void CuadrupleGenerator::printCuadruples(){
+	unsigned int i = 0;
+	for (std::list<std::string>::iterator it=this->Cuadruples.begin(); it != this->Cuadruples.end(); ++it){
+		std::cout << "[" << i++ << "]" <<*it << std::endl;
+	}
+	std::cout << std::endl << "Cuádruplos generados: " << this->Cuadruples.size() << std::endl;
+}
 
 
 

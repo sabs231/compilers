@@ -15,14 +15,15 @@ class CuadrupleGenerator{
 	protected:
 		LexemeTable *_lexTab;
 		unsigned int Tcount;
+		std::list<std::string> Cuadruples;
+
 	public:
 		CuadrupleGenerator(LexemeTable *);
 		CuadrupleGenerator(CuadrupleGenerator const &);
 		CuadrupleGenerator & operator=(CuadrupleGenerator const &);
 		~CuadrupleGenerator();
 		
-		int ParseToken(Lexema lexemaEsperado, bool checkVal);
-		std::list<std::string> run(LexemeTable *);
+		int run(LexemeTable *);
 		std::list<std::string> Sentencia(unsigned int currentCount);
 		std::list<std::string> EControl(unsigned int currentCount);
 		std::list<std::string> Declaracion();
@@ -32,11 +33,13 @@ class CuadrupleGenerator{
 		std::list<std::string> BloqueE(unsigned int currentCount);
 		ReturnCuadrupleInfo Condicion();
 		ReturnCuadrupleInfo Expresion();
-		std::list<std::string> Operacion(unsigned int currentCount);
+		std::list<std::string> Operacion();
 		ReturnCuadrupleInfo Operador(std::string leftOperator);
 		std::list<std::string> Impresion();
 		std::list<std::string> ImpresionP();
 		std::list<std::string> ImpresionE();
+		void writeToFile();
+		void printCuadruples();
 };
 
 #endif

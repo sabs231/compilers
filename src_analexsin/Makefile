@@ -22,7 +22,7 @@ CXX			=	g++
 
 NAME		=	analexsin
 
-FILE_NAME	=	symbolTable.txt
+FILE_NAME	=	symbolTable.txt cuadruplesTable.txt
 
 CXXFLAGS	+=	-I../include
 
