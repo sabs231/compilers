@@ -15,3 +15,6 @@
 #pura tontera
 analex
 *.orig
+
+#Mac Files
+.DS_Store
