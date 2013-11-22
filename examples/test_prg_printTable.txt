@@ -1,0 +1,33 @@
+count columnas = 0;
+count filas = 0;
+count indice = 0;
+arr headers = ["Titulo1","Titulo2","Titulo3" nil];
+arr content = ["T1C1","T2C1","T3C1","T1C2","T2C2","T3C2","T1C3","T2C3","T3C3" nil];
+@"<html><body>";
+@"<h1>IMPRESION DE UNA TABLA</h1>"@;
+@"<table><tr>";
+while(columnas < 3){
+	@"<td>";
+	@headers[columnas];
+	@"</td>";
+	columnas=columnas+1;
+}
+columnas=0;
+@"</tr>";
+while(filas < 3){
+	@"<tr>";
+	while(columnas < 3){
+		indice = columnas+filas*3;
+		@"<td>";
+		@content[indice]@;
+		@" El valor del indice es ";
+		@indice;
+		@"</td>";
+		columnas=columnas+1;
+	}
+	columnas=0;
+	@"</tr>";
+	filas=filas+1;
+}
+@"</table>";
+@"</body></html>";

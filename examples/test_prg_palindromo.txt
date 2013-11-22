@@ -1,0 +1,19 @@
+arr palabra = ["m","e","e","m" nil];
+count i = 0;
+count noes = 0;
+count indiceBack = 0;
+while(i<2){
+	indiceBack = 3 - i;
+	if(palabra[i] == palabra[indiceBack]){
+		@palabra[i];
+		@" ES IGUAL ";
+		@palabra[indiceBack];
+	}else{
+		@"NO ES PALINDROMO"@;
+		noes = 1;
+	}
+	i=i+1;
+}
+if(noes==0){
+	@"ES PALINDROMO"@;
+}
