@@ -23,13 +23,13 @@ class CuadrupleGenerator{
 		
 		int ParseToken(Lexema lexemaEsperado, bool checkVal);
 		std::list<std::string> run(LexemeTable *);
-		std::list<std::string> Sentencia(unsigned int cc);
-		std::list<std::string> EControl(unsigned int cc);
+		std::list<std::string> Sentencia(unsigned int currentCount);
+		std::list<std::string> EControl(unsigned int currentCount);
 		std::list<std::string> Declaracion();
 		std::list<std::string> Listid(int index, std::string idName);
 		std::list<std::string> ListidP(int index, std::string idName);
-		std::list<std::string> BloqueS();
-		std::list<std::string> BloqueE();
+		std::list<std::string> BloqueS(unsigned int currentCount);
+		std::list<std::string> BloqueE(unsigned int currentCount);
 		ReturnCuadrupleInfo Condicion();
 		std::list<std::string> Expresion();
 		std::list<std::string> Aarr();

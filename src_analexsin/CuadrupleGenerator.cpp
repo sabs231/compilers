@@ -49,32 +49,32 @@ int CuadrupleGenerator::ParseToken(Lexema lexemaEsperado, bool checkVal){
 	return 0;
 }
 
-std::list<std::string> CuadrupleGenerator::Sentencia(unsigned int cc){
+std::list<std::string> CuadrupleGenerator::Sentencia(unsigned int currentCount){
 	std::list<std::string> newCuadruples;
 	Lexema nextLexema = this->_lexTab->lookAheadLexema();
 	if(nextLexema._tipo == "Reserved" && (nextLexema._valor == "while" || nextLexema._valor == "if")){
 		// 01) Sentencia ->	EControl Sentencia
-		std::list<std::string> EControlList = EControl(cc);
+		std::list<std::string> EControlList = EControl(currentCount);
 		newCuadruples.splice (newCuadruples.end(), EControlList);
-		std::list<std::string> SentenciaList = Sentencia(cc + newCuadruples.size());
+		std::list<std::string> SentenciaList = Sentencia(currentCount + newCuadruples.size());
 		newCuadruples.splice (newCuadruples.end(), SentenciaList);
 	}else if(nextLexema._tipo == "Id"){
 		// 02) Sentencia ->	Operacion Sentencia 
-		std::list<std::string> OperacionList = Operacion(cc);
+		std::list<std::string> OperacionList = Operacion(currentCount);
 		newCuadruples.splice (newCuadruples.end(), OperacionList);		
-		std::list<std::string> SentenciaList = Sentencia(cc + newCuadruples.size());
+		std::list<std::string> SentenciaList = Sentencia(currentCount + newCuadruples.size());
 		newCuadruples.splice (newCuadruples.end(), SentenciaList);
 	}else if(nextLexema._tipo == "Reserved" && (nextLexema._valor == "arr" || nextLexema._valor == "count")){
 		// 03) Sentencia ->	Declaracion Sentencia
 		std::list<std::string> DeclaracionList = Declaracion();
 		newCuadruples.splice (newCuadruples.end(), DeclaracionList);
-		std::list<std::string> SentenciaList = Sentencia(cc + newCuadruples.size());
+		std::list<std::string> SentenciaList = Sentencia(currentCount + newCuadruples.size());
 		newCuadruples.splice (newCuadruples.end(), SentenciaList);
 	}else if(nextLexema._tipo == "Output"){
 		// 04) Sentencia ->	Impresión Sentencia
 		std::list<std::string> ImpresionList = Impresion();
 		newCuadruples.splice (newCuadruples.end(), ImpresionList);
-		std::list<std::string> SentenciaList = Sentencia(cc + newCuadruples.size());
+		std::list<std::string> SentenciaList = Sentencia(currentCount + newCuadruples.size());
 		newCuadruples.splice (newCuadruples.end(), SentenciaList);
 	}else if(nextLexema._tipo == "Agrupation" && nextLexema._valor == "}"){
 		// 02) Sentencia -> €
@@ -87,36 +87,56 @@ std::list<std::string> CuadrupleGenerator::Sentencia(unsigned int cc){
 	return newCuadruples;
 }
 
-std::list<std::string> CuadrupleGenerator::EControl(unsigned int cc){
+std::list<std::string> CuadrupleGenerator::EControl(unsigned int currentCount){
 	std::list<std::string> newCuadruples;
-	/*
 	Lexema nextLexema = this->_lexTab->lookAheadLexema();
 	if(nextLexema._tipo == "Reserved" && nextLexema._valor == "while"){
 		// 06) EControl    ->	while(Condicion)BloqueS
-		// (<, contador, 5, T2) <- Condicion empieza en cc
+		// (<, contador, 5, T2) <- Condicion empieza en currentCount
 		// (IFN, T2, goto28, _) <- Salto fuera del ciclo sin no se cumple (newCuadruples)
 		// BloqueS
 		// (GOTO, goto9, _, _) <- Salto a la linea original nuevamente
 		this->_lexTab->getLexema();
 		this->_lexTab->getLexema();
-		ReturnCuadrupleInfo returnCondicion = Condicion();
-		newCuadruples += returnCondicion.Ccount;
+		ReturnCuadrupleInfo rciCondicion = Condicion();
 		this->_lexTab->getLexema();
-		std::cout << "(IFN, T" << returnCondicion.Tname << ", goto"<< (returnCondicion.Ccount + cc + 1) << ", _)" << std::endl;
-		newCuadruples++;
-		newCuadruples += BloqueS();
-		std::cout << "(GOTO, goto"<< cc << ", _, _)" << std::endl;
-		newCuadruples++;
+		std::list<std::string> BloqueSList = BloqueS(rciCondicion.Clist.size() + currentCount);
+		
+		std::ostringstream ifnStream;
+		ifnStream << "(IFN, T" << rciCondicion.Tname << ", goto"<< (rciCondicion.Clist.size() + BloqueSList.size() + currentCount + 2) << ", _)";
+
+		newCuadruples.splice(newCuadruples.end(), rciCondicion.Clist);
+		newCuadruples.push_back(ifnStream.str());
+		newCuadruples.splice(newCuadruples.end(), BloqueSList);
+		
+		std::ostringstream gotoStream;
+		gotoStream << "(GOTO, goto"<< currentCount << ", _, _)";
+		newCuadruples.push_back(gotoStream.str());
 	}else if(nextLexema._tipo == "Reserved" && nextLexema._valor == "if"){
 		// 07) EControl    ->	if(Condicion)BloqueS BloqueE
-		ParseToken(Lexema("Reserved","if"),true);
-		ParseToken(Lexema("Agrupation","("),true);
-		Condicion();
-		ParseToken(Lexema("Agrupation",")"),true);
-		BloqueS();
-		BloqueE();
+		// (CONDICION,_,_,_)
+		// (IFN, TCondicion, gotoElse,_)
+		// Codigo IF
+		// (GOTO, gotoEndOfIf, _, _)
+		// Codigo Else
+		this->_lexTab->getLexema();
+		this->_lexTab->getLexema();
+		ReturnCuadrupleInfo rciCondicion = Condicion();
+		this->_lexTab->getLexema();
+		std::list<std::string> BloqueSList = BloqueS(rciCondicion.Clist.size() + currentCount);
+		std::list<std::string> BloqueEList = BloqueE(rciCondicion.Clist.size() + currentCount + BloqueSList.size());
+		
+		std::ostringstream ifnStream;
+		ifnStream << "(IFN, T" << rciCondicion.Tname << ", goto"<< (rciCondicion.Clist.size() + BloqueSList.size() + currentCount + 2) << ", _)";
+		std::ostringstream gotoStream;
+		gotoStream << "(GOTO, goto"<< (rciCondicion.Clist.size() + BloqueSList.size() + BloqueEList.size() + currentCount + 2) << ", _, _)";
+		
+		newCuadruples.splice(newCuadruples.end(), rciCondicion.Clist);
+		newCuadruples.push_back(ifnStream.str());
+		newCuadruples.splice(newCuadruples.end(), BloqueSList);
+		newCuadruples.push_back(gotoStream.str());
+		newCuadruples.splice(newCuadruples.end(), BloqueEList);
 	}
-	*/
 	return newCuadruples;
 }
 
@@ -189,26 +209,23 @@ std::list<std::string> CuadrupleGenerator::ListidP(int index, std::string idName
 	return newCuadruples;
 }
 
-std::list<std::string> CuadrupleGenerator::BloqueS(){
+std::list<std::string> CuadrupleGenerator::BloqueS(unsigned int currentCount){
 	std::list<std::string> newCuadruples;
-	/*
 	// 14) BloqueS -> {Sentencia}
-	ParseToken(Lexema("Agrupation","{"),true);
-	Sentencia(0); // XXX Sobreescribir con el conteo de cuadruplos corespondiente cuando lo implemente
-	ParseToken(Lexema("Agrupation","}"),true);
-	return 0;
-	*/
+	this->_lexTab->getLexema();
+	newCuadruples = Sentencia(currentCount);
+	this->_lexTab->getLexema();
 	return newCuadruples;
 }
 
-std::list<std::string> CuadrupleGenerator::BloqueE(){
+std::list<std::string> CuadrupleGenerator::BloqueE(unsigned int currentCount){
 	std::list<std::string> newCuadruples;
-	/*
 	Lexema nextLexema = this->_lexTab->lookAheadLexema();
 	if(nextLexema._tipo == "Reserved" && nextLexema._valor == "else"){
 		// 15) BloqueE -> else BloqueS
-		ParseToken(Lexema("Reserved","else"),true);
-		BloqueS();
+		this->_lexTab->getLexema();
+		std::list<std::string> BloqueSList = BloqueS(currentCount);
+		newCuadruples.splice (newCuadruples.end(), BloqueSList);
 	}else if(nextLexema._tipo == "id" ||
 			nextLexema._tipo == "Output" ||
 			(nextLexema._tipo == "Agrupation" && nextLexema._valor == "}") ||
@@ -220,14 +237,17 @@ std::list<std::string> CuadrupleGenerator::BloqueE(){
 		// 16) BloqueE -> €
 		// No hago nada
 	}
-	return 0;
-	*/
 	return newCuadruples;
 }
 
 ReturnCuadrupleInfo CuadrupleGenerator::Condicion(){
 	ReturnCuadrupleInfo newCuadruples;
+	// Come 3 lexemas para este ejemplo
+	this->_lexTab->getLexema();
+	this->_lexTab->getLexema();
+	this->_lexTab->getLexema();
 	newCuadruples.Tname = 0;
+	newCuadruples.Clist.push_back(std::string("(CONDICION,_,_,T0)"));
 	/*
 	// 17) Condicion -> Expresion relational Expresion
 	Expresion();
@@ -306,7 +326,7 @@ std::list<std::string> CuadrupleGenerator::AarrP2(){
 	return newCuadruples;
 }
 
-std::list<std::string> CuadrupleGenerator::Operacion(unsigned int cc){
+std::list<std::string> CuadrupleGenerator::Operacion(unsigned int currentCount){
 	/*
 	Lexema nextLexema 		= this->_lexTab->lookAheadLexema();
 	Lexema nextnextLexema	= this->_lexTab->lookAheadLexema(1);

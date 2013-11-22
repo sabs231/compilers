@@ -23,8 +23,9 @@ int main(int argc, char **argv){
 	if(anasin.run(tab)){
 		std::cout << "Gramática Aceptada" << std::endl;
 		std::list<std::string> cuadruplos = cuadrupleGenerator.run(tab);
+		unsigned int i = 0;
 		for (std::list<std::string>::iterator it=cuadruplos.begin(); it != cuadruplos.end(); ++it){
-			std::cout << *it << std::endl;
+			std::cout << "[" << i++ << "]" <<*it << std::endl;
 		}
 		std::cout << std::endl << "Cuádruplos generados: " << cuadruplos.size() << std::endl;
 	}else{
