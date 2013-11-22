@@ -259,9 +259,13 @@ ReturnCuadrupleInfo CuadrupleGenerator::Expresion(){
 			this->_lexTab->getLexema();
 			Lexema larridx	= this->_lexTab->getLexema();
 			this->_lexTab->getLexema();
+			std::ostringstream getArrStream;
+			getArrStream << "([]," << lid._valor << "," << larridx._valor << ", T"<< Tcount <<")";
+			Tcount++;
 			std::ostringstream arrStream;
-			arrStream << lid._valor << "[" << larridx._valor << "]";
+			arrStream << "T" << (Tcount-1);
 			newCuadruples = Operador(arrStream.str());
+			newCuadruples.Clist.push_front(getArrStream.str());
 		}else{
 			// 18) Expresion -> id Operador
 			Lexema lid		= this->_lexTab->getLexema();
