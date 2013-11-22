@@ -387,7 +387,7 @@ clean:compiler_clean
 
 distclean: clean
 	-$(DEL_FILE) -r compiler.app
-	-$(DEL_FILE) Makefile
+	##-$(DEL_FILE) Makefile
 
 
 mocclean: compiler_moc_header_clean compiler_moc_source_clean

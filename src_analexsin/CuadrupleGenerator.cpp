@@ -316,6 +316,7 @@ ReturnCuadrupleInfo CuadrupleGenerator::Operador(std::string leftOperator){
 
 std::list<std::string> CuadrupleGenerator::Operacion(unsigned int currentCount){
 	std::list<std::string> newCuadruples;
+	(void) currentCount;
 	Lexema nextLexema 		= this->_lexTab->lookAheadLexema();
 	Lexema nextnextLexema	= this->_lexTab->lookAheadLexema(1);
 	if(nextLexema._tipo == "Id"){
